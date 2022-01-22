@@ -4,4 +4,5 @@ description:    >
     Copied from openSUSE's: https://github.com/os-autoinst/os-autoinst-distri-opensuse/tree/master/tests/installation
 schedule:
     - installation/isosize
+    - installation/boot
 #    - installation/bootloader

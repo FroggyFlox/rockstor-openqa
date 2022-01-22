@@ -1,0 +1,35 @@
+{
+  "area": [
+    {
+      "xpos": 338,
+      "ypos": 43,
+      "width": 141,
+      "height": 20,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    },
+    {
+      "xpos": 371,
+      "ypos": 590,
+      "width": 114,
+      "height": 20,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    },
+    {
+      "xpos": 407,
+      "ypos": 670,
+      "width": 67,
+      "height": 20,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "time_zone"
+  ]
+}

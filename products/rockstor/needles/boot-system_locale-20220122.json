@@ -1,0 +1,26 @@
+{
+  "area": [
+    {
+      "xpos": 5,
+      "ypos": 1,
+      "width": 255,
+      "height": 19,
+      "type": "match",
+      "margin": 50,
+      "match": 96
+    },
+    {
+      "xpos": 396,
+      "ypos": 43,
+      "width": 169,
+      "height": 25,
+      "type": "match",
+      "margin": 50,
+      "match": 96
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "system_locale"
+  ]
+}

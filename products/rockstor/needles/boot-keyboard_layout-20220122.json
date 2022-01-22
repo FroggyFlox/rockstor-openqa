@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 354,
+      "ypos": 45,
+      "width": 186,
+      "height": 20,
+      "type": "match"
+    },
+    {
+      "xpos": 387,
+      "ypos": 592,
+      "width": 25,
+      "height": 17,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "keyboard_layout"
+  ]
+}
