@@ -16,6 +16,7 @@
 
 # This test was copied (and slightly simplified for testing purposes)
 # from: https://github.com/OSInside/kiwi-functional-tests/blob/master/tests/boot.pm
+# and: https://github.com/os-autoinst/os-autoinst-distri-opensuse/blob/master/tests/jeos/firstrun.pm
 
 
 use base 'basetest';
@@ -115,12 +116,15 @@ sub run {
         send_key('ret');
         assert_screen('time_zone', 60);
         send_key('ret');
+
+        # Enter and confirm password
         assert_screen('root_password', 60);
-        type_password();
+        type_password('SuperS3cr3tPassw0rd');
         send_key('ret');
         assert_screen('confirm_password', 60);
-        type_password();
+        type_password('SuperS3cr3tPassw0rd');
         send_key('ret');
+
         assert_screen('login_prompt', 600);
     }
 }
