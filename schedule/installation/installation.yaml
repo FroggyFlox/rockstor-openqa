@@ -5,4 +5,4 @@ description:    >
 schedule:
     - installation/isosize
     - installation/boot
-#    - installation/bootloader
+    - installation/login

@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 2,
+      "ypos": 687,
+      "width": 384,
+      "height": 16,
+      "type": "match",
+      "match": 96,
+      "margin": 250
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "rockstsor_bootstrap_complete"
+  ]
+}
