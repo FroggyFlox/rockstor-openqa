@@ -6,3 +6,8 @@ schedule:
     - installation/isosize
     - installation/boot
     - installation/login
+    - installation/reboot
+    - installation/boot_from_hdd
+    - installation/login
+    - installation/shutdown
+
