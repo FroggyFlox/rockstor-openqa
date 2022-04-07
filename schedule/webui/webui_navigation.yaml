@@ -1,0 +1,6 @@
+name:           webui_navigation
+description:    >
+    Runs a Leap 15.3 client image running minimalx and connect to the Rockstor
+    server under test to navigate throughout its webUI.
+schedule:
+    - webui/webui_navigation

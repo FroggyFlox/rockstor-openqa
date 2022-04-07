@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 19,
+      "ypos": 61,
+      "width": 390,
+      "height": 53,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "kiwi_bootloader_Rockstor_NAS"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "area": [
+    {
+      "ypos": 689,
+      "type": "match",
+      "xpos": 113,
+      "height": 30,
+      "width": 375
+    },
+    {
+      "xpos": 0,
+      "type": "match",
+      "ypos": 721,
+      "width": 146,
+      "height": 15
+    },
+    {
+      "xpos": 0,
+      "ypos": 737,
+      "type": "match",
+      "width": 62,
+      "height": 14
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "myip"
+  ]
+}

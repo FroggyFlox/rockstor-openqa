@@ -1,0 +1,35 @@
+{
+  "area": [
+    {
+      "xpos": 0,
+      "ypos": 670,
+      "width": 372,
+      "height": 49,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    },
+    {
+      "xpos": 0,
+      "ypos": 720,
+      "width": 62,
+      "height": 32,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    },
+    {
+      "xpos": 0,
+      "ypos": 754,
+      "width": 125,
+      "height": 14,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "login_prompt"
+  ]
+}
