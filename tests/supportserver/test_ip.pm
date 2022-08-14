@@ -30,22 +30,20 @@ use lockapi;
 use mmapi;
 
 sub run {
-    # Verify the login prompt is up
-    assert_screen('login_prompt', 300);
-    type_string('root');
-    send_key('ret');
+    # Clear the screen and verify we are logged in
+    enter_cmd('clear');
+    assert_screen('logged_in_textmode', 30);
 
-    assert_screen('password_prompt', 20);
-    type_string('SuperS3cr3tPassw0rd');
-    send_key('ret');
+    assert_script_run('ip a');
 
-    # Wait until Rockstor has finished starting up
-    # wait_still_screen(30);
-    # Rockstor bootstrap can take a while on first run
-    assert_screen('rockstsor_bootstrap_complete', 600);
-    systemctl('is-active rockstor.service');
-    assert_screen('rockstor_service_active', 60);
+    assert_script_run('myip');
+    assert_screen('myip', 60);
 
+    # unlock by creating the lock
+    mutex_create 'rockstor_ready';
+
+    # wait until all children finish
+    wait_for_children;
 }
 
 sub test_flags {

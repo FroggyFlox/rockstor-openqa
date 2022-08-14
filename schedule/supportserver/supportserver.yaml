@@ -4,3 +4,9 @@ description:    >
     as a support server. We will later try to connect to it from client tests.
 schedule:
     - supportserver/login
+#    - installation/reboot
+#    - supportserver/login
+    - supportserver/setup_multimachine
+    - installation/reboot
+    - supportserver/login
+    - supportserver/test_ip
