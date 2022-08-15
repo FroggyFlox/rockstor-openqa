@@ -1,0 +1,26 @@
+{
+  "area": [
+    {
+      "ypos": 44,
+      "width": 141,
+      "xpos": 339,
+      "type": "match",
+      "height": 23,
+      "match": 96,
+      "margin": 50
+    },
+    {
+      "ypos": 669,
+      "type": "match",
+      "height": 20,
+      "xpos": 397,
+      "width": 88,
+      "match": 96,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "time_zone"
+  ]
+}

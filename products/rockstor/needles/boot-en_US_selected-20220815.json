@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 469,
+      "ypos": 271,
+      "width": 44,
+      "height": 18,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "en_US_selected"
+  ]
+}

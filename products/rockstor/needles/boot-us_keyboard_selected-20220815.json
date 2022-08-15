@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 385,
+      "ypos": 591,
+      "width": 170,
+      "height": 19,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "us_keyboard_selected"
+  ]
+}
