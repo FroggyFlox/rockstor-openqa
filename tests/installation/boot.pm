@@ -108,6 +108,7 @@ sub run {
         # die 'Saw the installation screen on the second boot' if get_var('REBOOT', 0) == 1;
         send_key('ret');
         assert_screen('system_locale', 600);
+        
         send_key_until_needlematch('en_US_selected', 'down', 50);
         send_key('ret');
         assert_screen('keyboard_layout', 60);

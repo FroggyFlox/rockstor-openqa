@@ -1,0 +1,33 @@
+{
+  "area": [
+    {
+      "height": 20,
+      "ypos": 85,
+      "type": "match",
+      "xpos": 251,
+      "width": 147
+    },
+    {
+      "type": "match",
+      "width": 647,
+      "xpos": 172,
+      "ypos": 426,
+      "height": 75,
+      "click_point": {
+        "xpos": 323.5,
+        "ypos": 37.5
+      }
+    },
+    {
+      "height": 54,
+      "ypos": 614,
+      "xpos": 653,
+      "width": 383,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "security_exception"
+  ]
+}

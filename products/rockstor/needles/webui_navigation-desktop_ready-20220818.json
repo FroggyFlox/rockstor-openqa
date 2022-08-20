@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "ypos": 914,
+      "height": 46,
+      "xpos": 4,
+      "width": 74,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "desktop_ready"
+  ]
+}

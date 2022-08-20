@@ -14,10 +14,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# This test was copied (and slightly simplified for testing purposes)
-# from: https://github.com/OSInside/kiwi-functional-tests/blob/master/tests/login.pm
-# and: https://github.com/os-autoinst/os-autoinst-distri-opensuse/blob/master/tests/jeos/firstrun.pm
-
 # Here, we simply test if we can successfully login at the console on first boot.
 
 
@@ -25,24 +21,40 @@ use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-# use Utils::Systemd;
 use lockapi;
 use mmapi;
 
 sub run {
-    # Clear the screen and verify we have an IP address
-    enter_cmd('clear');
-    # assert_screen('logged_in_textmode', 30);
+    # Wait until the system has fully booted to desktop
+    sleep(20);
+    assert_screen('desktop_ready', 300);
+    # sleep(20);
 
-    assert_script_run('ip a');
-    # assert_script_run('myip');
-    assert_screen('mm_ip_a', 60);
+    # send_key('ctrl-alt-t');
+    # assert_screen('xterm_ready', 20);
+    assert_and_click('kde_logo');
+    assert_and_click('konsole');
+    assert_screen('konsole_launched', 20);
 
-    # unlock by creating the lock
-    mutex_create 'rockstor_ready';
+    # wait until the parent (Rockstor) is ready
+    mutex_wait 'rockstor_ready';
 
-    # wait until all children finish
-    wait_for_children;
+    # Test network connection
+    enter_cmd('ip a');
+    enter_cmd('ping -c 3 rockstorserver');
+    enter_cmd('ping -c 3 10.0.2.101');
+
+    # Start firefox and browse to rockstorserver
+    enter_cmd('firefox https://rockstorserver');
+    # wait_still_screen(stilltime => 4, timeout => 30);
+    # assert_screen('security_exception', 60);
+    assert_and_click('security_exception');
+    assert_and_click('click_advanced');
+    # Navigate to the "Accept" button
+    send_key('tab');
+    send_key('tab');
+    send_key('tab');
+    send_key('ret');
 }
 
 sub test_flags {

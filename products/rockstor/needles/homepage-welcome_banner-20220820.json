@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 343,
+      "ypos": 154,
+      "width": 590,
+      "height": 289,
+      "type": "match",
+      "match": 96,
+      "margin": 50,
+      "click_point": {
+        "xpos": 438,
+        "ypos": 265.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "welcome_banner"
+  ]
+}

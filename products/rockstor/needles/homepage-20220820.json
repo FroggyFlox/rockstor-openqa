@@ -1,0 +1,78 @@
+{
+  "area": [
+    {
+      "xpos": 7,
+      "ypos": 121,
+      "width": 1136,
+      "height": 40,
+      "type": "match"
+    },
+    {
+      "xpos": 1212,
+      "ypos": 122,
+      "width": 63,
+      "height": 38,
+      "type": "match"
+    },
+    {
+      "xpos": 11,
+      "ypos": 168,
+      "width": 136,
+      "height": 16,
+      "type": "match"
+    },
+    {
+      "xpos": 416,
+      "ypos": 168,
+      "width": 656,
+      "height": 18,
+      "type": "match"
+    },
+    {
+      "xpos": 1186,
+      "ypos": 169,
+      "width": 42,
+      "height": 17,
+      "type": "match"
+    },
+    {
+      "xpos": 3,
+      "ypos": 200,
+      "width": 145,
+      "height": 359,
+      "type": "match"
+    },
+    {
+      "xpos": 166,
+      "ypos": 204,
+      "width": 834,
+      "height": 36,
+      "type": "match"
+    },
+    {
+      "xpos": 166,
+      "ypos": 509,
+      "width": 830,
+      "height": 35,
+      "type": "match"
+    },
+    {
+      "xpos": 168,
+      "ypos": 814,
+      "width": 278,
+      "height": 35,
+      "type": "match"
+    },
+    {
+      "xpos": 220,
+      "ypos": 168,
+      "width": 77,
+      "height": 17,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "homepage"
+  ]
+}

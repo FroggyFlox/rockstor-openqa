@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 6,
+      "ypos": 127,
+      "width": 614,
+      "height": 418,
+      "type": "match",
+      "match": 96,
+      "margin": 50,
+      "click_point": {
+        "xpos": 569,
+        "ypos": 395
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "verify_first_login_form_and_submit"
+  ]
+}

@@ -14,10 +14,6 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# This test was copied (and slightly simplified for testing purposes)
-# from: https://github.com/OSInside/kiwi-functional-tests/blob/master/tests/login.pm
-# and: https://github.com/os-autoinst/os-autoinst-distri-opensuse/blob/master/tests/jeos/firstrun.pm
-
 # Here, we simply test if we can successfully login at the console on first boot.
 
 
@@ -25,24 +21,28 @@ use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-# use Utils::Systemd;
-use lockapi;
-use mmapi;
+# use lockapi;
+# use mmapi;
 
 sub run {
-    # Clear the screen and verify we have an IP address
-    enter_cmd('clear');
-    # assert_screen('logged_in_textmode', 30);
 
-    assert_script_run('ip a');
-    # assert_script_run('myip');
-    assert_screen('mm_ip_a', 60);
+    # Verify first-login form is displayed and accept EULA
+    assert_and_click('first_login_form_eula');
+    # Enter hostname
+    assert_and_click('eula_checked'); # Verify EULA is accepted and enter hostname field
+    wait_screen_change { type_string('rockstor', max_interval => utils::SLOW_TYPING_SPEED); };
+    send_key('tab'); # Select username field
+    # Enter username
+    wait_screen_change { type_string('admin', max_interval => utils::SLOW_TYPING_SPEED); };
+    send_key('tab'); # Select password field
+    # Enter password
+    wait_screen_change { type_string('admin', max_interval => utils::SLOW_TYPING_SPEED); };
+    send_key('tab'); # Select confirm password field
+    # Enter password
+    wait_screen_change { type_string('admin', max_interval => utils::SLOW_TYPING_SPEED); };
+    # Submit
+    assert_and_click('verify_first_login_form_and_submit');
 
-    # unlock by creating the lock
-    mutex_create 'rockstor_ready';
-
-    # wait until all children finish
-    wait_for_children;
 }
 
 sub test_flags {

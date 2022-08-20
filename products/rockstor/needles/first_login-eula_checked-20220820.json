@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 161,
+      "ypos": 222,
+      "width": 336,
+      "height": 131,
+      "type": "match",
+      "match": 96,
+      "margin": 50,
+      "click_point": {
+        "xpos": 246,
+        "ypos": 105.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "eula_checked"
+  ]
+}

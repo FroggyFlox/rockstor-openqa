@@ -24,21 +24,17 @@ sub run {
     # select_console 'root-console';
 
     # Do not use external DNS for our internal hostnames
-    assert_script_run('echo "10.0.2.101 rockstorserver" >> /etc/hosts');
-    assert_script_run('echo "10.0.2.102 client" >> /etc/hosts');
+    enter_cmd('echo "10.0.2.101 rockstorserver" >> /etc/hosts');
+    enter_cmd('echo "10.0.2.102 client" >> /etc/hosts');
 
     # Configure static network, disable firewall
     # disable_and_stop_service($self->firewall) if check_unit_file($self->firewall);
-    disable_and_stop_service('apparmor', ignore_failure => 1);
+    # disable_and_stop_service('apparmor', ignore_failure => 1);
 
     # Configure the internal network an  try it
-    if ($hostname =~ /rockstorserver|master/) {
-        record_info('Hostname is rockstorserver');
-        setup_static_mm_network('10.0.2.101/24');
-    } else {
-        record_info('Hostname is NOT rockstorserver');
-        setup_static_mm_network('10.0.2.102/24');
-    }
+    setup_static_mm_network('10.0.2.102/24');
+
+    enter_cmd('reboot');
 
     # Set the hostname to identify both minions
     # set_hostname $hostname;

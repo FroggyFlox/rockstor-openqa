@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 4,
+      "ypos": 119,
+      "width": 639,
+      "height": 453,
+      "type": "match",
+      "match": 96,
+      "margin": 50,
+      "click_point": {
+        "xpos": 365.5,
+        "ypos": 168.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "first_login_form_eula"
+  ]
+}
