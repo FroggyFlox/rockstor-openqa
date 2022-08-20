@@ -38,11 +38,11 @@ sub run {
     send_key('ret');
 
     # Wait until Rockstor has finished starting up
-    # wait_still_screen(30);
     # Rockstor bootstrap can take a while on first run
     assert_screen('rockstsor_bootstrap_complete', 600);
     systemctl('is-active rockstor.service');
 
+    # Simply check for an IP address
     assert_script_run('myip');
     assert_screen('myip',60);
 }

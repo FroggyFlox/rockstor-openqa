@@ -15,7 +15,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 # This test was copied (and slightly simplified for testing purposes)
-# https://github.com/OSInside/kiwi-functional-tests/blob/6cb9cd58071a03f2377ba069de5f2a14091ce4a2/tests/reboot.pm
+# https://github.com/OSInside/kiwi-functional-tests/blob/6cb9cd58071a03f2377ba069de5f2a14091ce4a2/tests/shutdown.pm
 
 
 use base 'basetest';

@@ -1,7 +1,7 @@
 name:           installation
 description:    >
     Simple installation test suite.
-    Copied from openSUSE's: https://github.com/os-autoinst/os-autoinst-distri-opensuse/tree/master/tests/installation
+    Adapted from openSUSE's: https://github.com/os-autoinst/os-autoinst-distri-opensuse/tree/master/tests/installation
 schedule:
     - installation/isosize
     - installation/boot
