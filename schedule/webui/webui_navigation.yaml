@@ -1,6 +1,6 @@
 name:           webui_navigation
 description:    >
-    Runs a Leap 15.4 client image running minimalx and connect to the Rockstor
+    Runs a Leap 15.4 client image running KDE and connect to the Rockstor
     server under test to navigate throughout its webUI.
 schedule:
     - webui/start_konsole_root

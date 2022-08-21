@@ -14,7 +14,10 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we simply test if we can successfully login at the console on first boot.
+# Here, we:
+# - open Konsole
+# - verify we have an IP address
+# - open Firefox to brose to rockstor SUT
 
 
 use base 'basetest';
@@ -28,10 +31,10 @@ sub run {
     # Wait until the system has fully booted to desktop
     sleep(20);
     assert_screen('desktop_ready', 300);
-    # sleep(20);
 
-    # send_key('ctrl-alt-t');
-    # assert_screen('xterm_ready', 20);
+    # We could use the ctl-alt-t shortcut to open Konsole
+    # but this is somehow not working 100% of the time.
+    # Let's thus use the UI instead.
     assert_and_click('kde_logo');
     assert_and_click('konsole');
     assert_screen('konsole_launched', 20);
@@ -46,11 +49,9 @@ sub run {
 
     # Start firefox and browse to rockstorserver
     enter_cmd('firefox https://rockstorserver');
-    # wait_still_screen(stilltime => 4, timeout => 30);
-    # assert_screen('security_exception', 60);
     assert_and_click('security_exception');
     assert_and_click('click_advanced');
-    # Navigate to the "Accept" button
+    # Navigate to the "Accept" button and press "Enter"
     send_key('tab');
     send_key('tab');
     send_key('tab');

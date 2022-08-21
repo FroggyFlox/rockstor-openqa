@@ -21,8 +21,6 @@ use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-# use lockapi;
-# use mmapi;
 
 sub run {
 

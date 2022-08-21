@@ -26,8 +26,6 @@ use warnings;
 use strict;
 use testapi;
 use Utils::Systemd;
-use lockapi;
-use mmapi;
 
 sub run {
     # Verify the login prompt is up

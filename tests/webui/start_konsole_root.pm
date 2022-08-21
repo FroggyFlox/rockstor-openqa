@@ -14,7 +14,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we simply test if we can successfully login at the console on first boot.
+# Here, we simply open a konsole session with root privileges.
 
 
 use base 'basetest';
@@ -27,18 +27,16 @@ sub run {
     assert_screen('desktop_ready', 300);
     sleep(10); # most likely unnecessary
 
-    # Start firefox and connect to IP
-    # x11_start_program('firefox https://10.0.2.15', valid => 0);
-    # send_key('ctrl-alt-t');
+    # We could use the ctl-alt-t shortcut to open Konsole
+    # but this is somehow not working 100% of the time.
+    # Let's thus use the UI instead.
     assert_and_click('kde_logo');
     assert_and_click('konsole');
     assert_screen('konsole_launched', 20);
-    # assert_and_click('konsole_launched');
     enter_cmd('su');
     sleep(1);
     type_string('rockytest');
     send_key('ret');
-    # assert_screen('konsole_maximized_ready', 20);
 }
 
 sub test_flags {

@@ -14,15 +14,19 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we simply test if we can successfully login at the console on first boot.
+# Here, we go through Rockstor's first login setup:
+# - Accept EULA
+# - Enter hostname
+# - Enter password
+# - Verify password
+# - Verify the Dashboard is displayed
 
 
 use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-# use lockapi;
-# use mmapi;
+use utils;
 
 sub run {
 

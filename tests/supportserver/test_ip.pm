@@ -14,28 +14,22 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# This test was copied (and slightly simplified for testing purposes)
-# from: https://github.com/OSInside/kiwi-functional-tests/blob/master/tests/login.pm
-# and: https://github.com/os-autoinst/os-autoinst-distri-opensuse/blob/master/tests/jeos/firstrun.pm
-
-# Here, we simply test if we can successfully login at the console on first boot.
+# Here, we simply test if we have an IP address. If we do, we let the
+# children know we are ready.
 
 
 use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-# use Utils::Systemd;
 use lockapi;
 use mmapi;
 
 sub run {
     # Clear the screen and verify we have an IP address
     enter_cmd('clear');
-    # assert_screen('logged_in_textmode', 30);
 
     assert_script_run('ip a');
-    # assert_script_run('myip');
     assert_screen('mm_ip_a', 60);
 
     # unlock by creating the lock
