@@ -1,0 +1,28 @@
+defaults:
+  x86_64:
+    machine: 64bit
+    priority: 50
+products:
+  rockstor-*-generic-x86_64:
+    distri: rockstor
+    flavor: generic
+    version: '*'
+scenarios:
+  x86_64:
+    rockstor-*-generic-x86_64:
+    - install_textmode:
+        settings:
+          YAML_SCHEDULE: schedule/installation/installation.yaml
+          PUBLISH_HDD_1: "%DISTRI%-%VERSION%-%FLAVOR%-%ARCH%-%BUILD%-non-efi.qcow2"
+    - supportserver_rockstor_webui:
+        machine: 64bit_tap
+        settings:
+          YAML_SCHEDULE: schedule/supportserver/supportserver.yaml
+          START_AFTER_TEST: install_textmode@64bit
+          PUBLISH_HDD_1: "%DISTRI%-%VERSION%-%FLAVOR%-%ARCH%-%BUILD%-non-efi-prepared.qcow2"
+    - webui_navigation:
+        machine: 64bit_tap
+        settings:
+          YAML_SCHEDULE: schedule/webui/webui_navigation.yaml
+          PARALLEL_WITH: supportserver_rockstor_webui
+          PUBLISH_HDD_1: "Leap15-4_KDE_Client-prepared.qcow2"
