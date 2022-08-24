@@ -14,10 +14,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we:
-# - open Konsole
-# - verify we have an IP address
-# - open Firefox to browse to rockstor SUT
+# Here, we initiate the client shutdown.
 
 
 use base 'basetest';
@@ -25,45 +22,30 @@ use warnings;
 use strict;
 use testapi;
 use Utils::Kde qw(launch_krunner);
-use lockapi;
-use mmapi;
 use utils;
 
 sub run {
-    # Wait until the system has fully booted to desktop
-    sleep(20);
-    assert_screen('desktop_ready', 300);
-
-    # We could use the ctl-alt-t shortcut to open Konsole
-    # but this is somehow not working 100% of the time.
-    # Let's thus use the UI instead.
-    assert_and_click('kde_logo');
-    assert_and_click('konsole');
-    assert_screen('konsole_launched', 20);
-
-    # wait until the parent (Rockstor) is ready
-    mutex_wait 'rockstor_ready';
-
-    # Test network connection
-    enter_cmd('ip a');
-    enter_cmd('ping -c 3 rockstorserver');
-    enter_cmd('ping -c 3 10.0.2.101');
-    sleep(5); # sleep for 5 sec to allow visual inspection if needed
-    enter_cmd('exit');
-
-    # Launch KRunner
+    # Close Firefox (we assume it's opened and in focus)
+    send_key('alt-f4');
+    check_screen('firefox_confirm_close_tabs', 'timeout' => 10);
+    if (match_has_tag('firefox_confirm_close_tabs')) {
+        send_key('ret');
+    }
+    wait_still_screen();
+    # Launch Krunner
     launch_krunner();
 
-    # Start firefox and browse to rockstorserver
-    type_string_slow('firefox https://rockstorserver');
+    # Enter the shutdown command
+    # enter_cmd('shutdown');
+    type_string_slow('shutdown');
     send_key('ret');
-    assert_and_click('security_exception');
-    assert_and_click('click_advanced');
-    # Navigate to the "Accept" button and press "Enter"
-    send_key('tab');
-    send_key('tab');
-    send_key('tab');
+
+    # Confirm shutdown
+    assert_screen('shutdown_screen');
     send_key('ret');
+
+    # Assert shutdown
+    assert_shutdown();
 }
 
 sub test_flags {

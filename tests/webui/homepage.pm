@@ -1,4 +1,4 @@
-# Copyright (C) 2020-2021 SUSE LLC
+# Copyright (c) 2012-2022 RockStor, Inc. <http://rockstor.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

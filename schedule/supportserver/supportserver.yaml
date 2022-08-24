@@ -8,3 +8,4 @@ schedule:
     - installation/reboot
     - supportserver/login
     - supportserver/test_ip
+    - installation/shutdown

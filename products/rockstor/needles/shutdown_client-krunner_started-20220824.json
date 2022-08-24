@@ -1,0 +1,26 @@
+{
+  "area": [
+    {
+      "xpos": 360,
+      "ypos": 4,
+      "width": 43,
+      "height": 35,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    },
+    {
+      "xpos": 853,
+      "ypos": 5,
+      "width": 66,
+      "height": 32,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "krunner_started"
+  ]
+}

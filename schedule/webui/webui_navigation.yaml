@@ -8,3 +8,4 @@ schedule:
     - webui/browse_to_rockstor
     - webui/first_login
     - webui/homepage
+    - webui/shutdown_client
