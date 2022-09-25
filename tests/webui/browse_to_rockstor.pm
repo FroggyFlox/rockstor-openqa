@@ -32,14 +32,14 @@ use utils;
 sub run {
     # Wait until the system has fully booted to desktop
     sleep(20);
-    assert_screen('desktop_ready', 300);
+    assert_screen('desktop_ready', 600);
 
     # We could use the ctl-alt-t shortcut to open Konsole
     # but this is somehow not working 100% of the time.
     # Let's thus use the UI instead.
     assert_and_click('kde_logo');
     assert_and_click('konsole');
-    assert_screen('konsole_launched', 20);
+    assert_screen('konsole_launched', 40);
 
     # wait until the parent (Rockstor) is ready
     mutex_wait 'rockstor_ready';

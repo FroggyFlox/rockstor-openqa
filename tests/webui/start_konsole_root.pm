@@ -24,7 +24,7 @@ use testapi;
 
 sub run {
     # Wait until the system has fully booted to desktop
-    assert_screen('desktop_ready', 300);
+    assert_screen('desktop_ready', 600);
     sleep(10); # most likely unnecessary
 
     # We could use the ctl-alt-t shortcut to open Konsole
@@ -32,7 +32,7 @@ sub run {
     # Let's thus use the UI instead.
     assert_and_click('kde_logo');
     assert_and_click('konsole');
-    assert_screen('konsole_launched', 20);
+    assert_screen('konsole_launched', 40);
     enter_cmd('su');
     sleep(1);
     type_string('rockytest');
