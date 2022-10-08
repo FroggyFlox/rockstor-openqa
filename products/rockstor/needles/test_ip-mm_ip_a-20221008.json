@@ -1,0 +1,31 @@
+{
+  "area": [
+    {
+      "ypos": 2,
+      "height": 12,
+      "width": 188,
+      "xpos": 10,
+      "type": "match"
+    },
+    {
+      "type": "match",
+      "xpos": 1,
+      "ypos": 112,
+      "height": 16,
+      "width": 47,
+      "margin": 50,
+      "match": 90
+    },
+    {
+      "type": "match",
+      "xpos": 33,
+      "height": 18,
+      "ypos": 175,
+      "width": 145
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "mm_ip_a"
+  ]
+}
