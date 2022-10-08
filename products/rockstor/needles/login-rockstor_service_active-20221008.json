@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "xpos": 56,
+      "height": 15,
+      "width": 297,
+      "ypos": 720,
+      "type": "match",
+      "margin": 300
+    },
+    {
+      "height": 13,
+      "xpos": 1,
+      "type": "match",
+      "width": 56,
+      "ypos": 739
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "rockstor_service_active"
+  ]
+}
