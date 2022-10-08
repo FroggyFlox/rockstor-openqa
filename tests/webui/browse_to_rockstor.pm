@@ -24,24 +24,18 @@ use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-use Utils::Kde qw(launch_krunner);
+use Utils::Kde qw(launch_konsole launch_firefox);
 use lockapi;
 use mmapi;
-use utils;
 
 sub run {
     # Wait until the system has fully booted to desktop
     sleep(20);
     assert_screen('desktop_ready', 600);
 
-    # We could use the ctl-alt-t shortcut to open Konsole
-    # but this is somehow not working 100% of the time.
-    # Let's thus use the UI instead.
-    assert_and_click('kde_logo');
-    assert_and_click('konsole');
-    assert_screen('konsole_launched', 40);
-
-    # wait until the parent (Rockstor) is ready
+    # Start Konsole
+    launch_konsole();
+    # Wait until the parent (rockstorserver) is ready
     mutex_wait 'rockstor_ready';
 
     # Test network connection
@@ -51,12 +45,8 @@ sub run {
     sleep(5); # sleep for 5 sec to allow visual inspection if needed
     enter_cmd('exit');
 
-    # Launch KRunner
-    launch_krunner();
-
     # Start firefox and browse to rockstorserver
-    type_string_slow('firefox https://rockstorserver');
-    send_key('ret');
+    launch_firefox(url => 'https://rockstorserver');
     assert_and_click('security_exception');
     assert_and_click('click_advanced');
     # Navigate to the "Accept" button and press "Enter"

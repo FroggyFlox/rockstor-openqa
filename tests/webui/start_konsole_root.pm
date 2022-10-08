@@ -21,18 +21,17 @@ use base 'basetest';
 use warnings;
 use strict;
 use testapi;
+use Utils::Kde qw(launch_krunner launch_konsole);
 
 sub run {
     # Wait until the system has fully booted to desktop
     assert_screen('desktop_ready', 600);
     sleep(10); # most likely unnecessary
 
-    # We could use the ctl-alt-t shortcut to open Konsole
-    # but this is somehow not working 100% of the time.
-    # Let's thus use the UI instead.
-    assert_and_click('kde_logo');
-    assert_and_click('konsole');
-    assert_screen('konsole_launched', 40);
+    # Start Konsole
+    launch_konsole();
+
+    # Login as root
     enter_cmd('su');
     sleep(1);
     type_string('rockytest');
