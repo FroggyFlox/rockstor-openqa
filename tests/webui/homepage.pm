@@ -14,7 +14,8 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we simply test if we can successfully login at the console on first boot.
+# Here, we simply verify that the Dashboard is displayed and then shutdown
+# the machine.
 
 
 use base 'basetest';
@@ -32,9 +33,22 @@ sub run {
 
     # Assert banner if no update channel is selected
     my $update_channel = get_var('UPDATE_CHANNEL');
+    # unless (length($update_channel)) {
+    #     record_info('no update channel is selected, so dismiss the welcome banner');
+    #     assert_and_click('welcome_banner', clicktime => 2);
+    # }
+
+    # Alternative way, with retries in case the banner dismissal fails:
     unless (length($update_channel)) {
-        record_info('no update channel is selected, so dismiss the welcome banner');
-        assert_and_click('welcome_banner');
+        my $max_tries = 4;
+        my $retry = 0;
+        do {
+            record_info('no update channel is selected, so dismiss the welcome banner');
+            assert_and_click('welcome_banner', clicktime => 1, timeout => 10);
+            check_screen('homepage', timeout => 10);
+            record_soft_failure('The homepage cannot be found so it seems the welcome banner is still up. Try again.') unless match_has_tag('homepage');
+            $retry++;
+        } while (($retry < $max_tries) && !match_has_tag('homepage'));
     }
 
     assert_screen('homepage');

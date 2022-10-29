@@ -24,7 +24,7 @@ use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-use Utils::Kde qw(launch_konsole launch_firefox);
+use Utils::Kde qw(launch_konsole launch_firefox x11_start_program);
 use lockapi;
 use mmapi;
 
@@ -34,7 +34,16 @@ sub run {
     assert_screen('desktop_ready', 600);
 
     # Start Konsole
-    launch_konsole();
+    # launch_konsole();
+    Utils::Kde::x11_start_program(
+        'konsole',
+        'valid' => 1,
+        'no_wait' => 1,
+        'match_typed' => 'konsole_command_typed',
+        'target_match' => 'konsole_launched',
+        'timeout' => 30
+    );
+    # Utils::Kde::x11_start_program('konsole', target_match => 'konsole_launched', 'timeout' => 30);
     # Wait until the parent (rockstorserver) is ready
     mutex_wait 'rockstor_ready';
 
@@ -46,7 +55,16 @@ sub run {
     enter_cmd('exit');
 
     # Start firefox and browse to rockstorserver
-    launch_firefox(url => 'https://rockstorserver');
+    # launch_firefox(url => 'https://rockstorserver');
+    # Utils::Kde::x11_start_program('firefox https://rockstorserver', target_match => 'firefox_rockstorserver_url_typed', 'timeout' => 60);
+    Utils::Kde::x11_start_program(
+        'firefox https://rockstorserver',
+        'valid' => 1,
+        'no_wait' => 1,
+        'match_typed' => 'firefox_url_typed',
+        'target_match' => 'security_exception',
+        'timeout' => 30
+    );
     assert_and_click('security_exception');
     assert_and_click('click_advanced');
     # Navigate to the "Accept" button and press "Enter"

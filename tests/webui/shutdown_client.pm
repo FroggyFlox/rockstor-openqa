@@ -32,13 +32,21 @@ sub run {
         send_key('ret');
     }
     wait_still_screen();
-    # Launch Krunner
-    launch_krunner();
 
-    # Enter the shutdown command
-    # enter_cmd('shutdown');
-    type_string_slow('shutdown');
-    send_key('ret');
+    # # Launch Krunner
+    # launch_krunner();
+    #
+    # # Enter the shutdown command
+    # type_string_slow('shutdown');
+    # send_key('ret');
+    Utils::Kde::x11_start_program(
+        'shutdown',
+        'valid' => 0,
+        'no_wait' => 1,
+        'match_typed' => 'shutdown_command_typed',
+        # 'target_match' => 'shutdown_screen',
+        'timeout' => 30
+    );
 
     # Confirm shutdown
     assert_screen('shutdown_screen');
