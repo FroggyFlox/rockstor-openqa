@@ -19,7 +19,6 @@
 # - Enter hostname
 # - Enter password
 # - Verify password
-# - Verify the Dashboard is displayed
 
 
 use base 'basetest';

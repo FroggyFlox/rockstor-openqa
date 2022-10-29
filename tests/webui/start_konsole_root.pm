@@ -21,7 +21,7 @@ use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-use Utils::Kde qw(launch_krunner launch_konsole);
+use Utils::Kde qw(launch_krunner launch_konsole x11_start_program);
 
 sub run {
     # Wait until the system has fully booted to desktop
@@ -29,7 +29,16 @@ sub run {
     sleep(10); # most likely unnecessary
 
     # Start Konsole
-    launch_konsole();
+    # launch_konsole();
+    # Utils::Kde::x11_start_program('konsole', target_match => 'konsole_launched', 'timeout' => 60);
+    Utils::Kde::x11_start_program(
+        'konsole',
+        'valid' => 1,
+        'no_wait' => 1,
+        'match_typed' => 'konsole_command_typed',
+        'target_match' => 'konsole_launched',
+        'timeout' => 30
+    );
 
     # Login as root
     enter_cmd('su');
