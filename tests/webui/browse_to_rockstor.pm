@@ -68,10 +68,10 @@ sub run {
     assert_and_click('security_exception');
     assert_and_click('click_advanced');
     # Navigate to the "Accept" button and press "Enter"
-    send_key('tab');
-    send_key('tab');
-    send_key('tab');
-    send_key('ret');
+    send_key('tab', 'wait_screen_change' => 1);
+    send_key('tab', 'wait_screen_change' => 1);
+    send_key('tab', 'wait_screen_change' => 1);
+    send_key('ret', 'wait_screen_change' => 1);
 }
 
 sub test_flags {

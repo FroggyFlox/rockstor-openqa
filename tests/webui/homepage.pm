@@ -44,8 +44,8 @@ sub run {
         my $retry = 0;
         do {
             record_info('no update channel is selected, so dismiss the welcome banner');
-            assert_and_click('welcome_banner', clicktime => 1, timeout => 10);
-            check_screen('homepage', timeout => 10);
+            assert_and_click('welcome_banner', clicktime => 1, timeout => 120);
+            check_screen('homepage', timeout => 60);
             record_soft_failure('The homepage cannot be found so it seems the welcome banner is still up. Try again.') unless match_has_tag('homepage');
             $retry++;
         } while (($retry < $max_tries) && !match_has_tag('homepage'));
