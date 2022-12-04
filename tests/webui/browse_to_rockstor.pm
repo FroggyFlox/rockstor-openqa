@@ -62,16 +62,21 @@ sub run {
         'valid' => 1,
         'no_wait' => 1,
         'match_typed' => 'firefox_url_typed',
-        'target_match' => 'security_exception',
+        'target_match' => [qw(security_exception homepage welcome_banner)],
         'timeout' => 30
     );
-    assert_and_click('security_exception');
-    assert_and_click('click_advanced');
-    # Navigate to the "Accept" button and press "Enter"
-    send_key('tab', 'wait_screen_change' => 1);
-    send_key('tab', 'wait_screen_change' => 1);
-    send_key('tab', 'wait_screen_change' => 1);
-    send_key('ret', 'wait_screen_change' => 1);
+
+    # If this is the first time connecting to rockstorserver,
+    # we need to acknowledge the security exception
+    if (check_var('FIRST_BROWSE', 1)) {
+        assert_and_click('security_exception');
+        assert_and_click('click_advanced');
+        # Navigate to the "Accept" button and press "Enter"
+        send_key('tab', 'wait_screen_change' => 1);
+        send_key('tab', 'wait_screen_change' => 1);
+        send_key('tab', 'wait_screen_change' => 1);
+        send_key('ret', 'wait_screen_change' => 1);
+    }
 }
 
 sub test_flags {

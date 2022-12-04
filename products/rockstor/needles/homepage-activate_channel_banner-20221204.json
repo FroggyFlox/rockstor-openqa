@@ -1,0 +1,19 @@
+{
+  "area": [
+    {
+      "height": 253,
+      "type": "match",
+      "ypos": 154,
+      "width": 585,
+      "xpos": 343,
+      "click_point": {
+        "xpos": 446.5,
+        "ypos": 233.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "welcome_banner"
+  ]
+}
