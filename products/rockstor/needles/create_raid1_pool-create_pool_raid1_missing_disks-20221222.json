@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 275,
+      "ypos": 301,
+      "width": 478,
+      "height": 59,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "create_pool_raid1_missing_disks"
+  ]
+}

@@ -1,0 +1,22 @@
+defaults:
+  x86_64:
+    machine: 64bit
+    priority: 50
+products:
+  rockstor-*-generic-x86_64:
+    distri: rockstor
+    flavor: generic
+    version: '*'
+scenarios:
+  x86_64:
+    rockstor-*-generic-x86_64:
+    - raid1_supportserver:
+        machine: 64bit_tap
+        settings:
+          YAML_SCHEDULE: schedule/storage/pools/raid1/raid1_supportserver.yaml
+          START_AFTER_TEST: supportserver_rockstor_webui@64bit_tap
+    - raid1_webui:
+        machine: 64bit_tap
+        settings:
+          YAML_SCHEDULE: schedule/storage/pools/raid1/raid1_webui.yaml
+          PARALLEL_WITH: raid1_supportserver

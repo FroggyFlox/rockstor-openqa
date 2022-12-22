@@ -14,45 +14,37 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we initiate the client shutdown.
+# This module is used to navigate to test the import of a pool
 
 
 use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-use utils;
+use Utils::Rockstor_webui qw(navigate_to_disks navigate_to_pools);
 
 sub run {
-    # Close Firefox (we assume it's opened and in focus)
-    send_key('alt-f4');
-    check_screen('firefox_confirm_close_tabs', 'timeout' => 10);
-    if (match_has_tag('firefox_confirm_close_tabs')) {
-        send_key('ret');
-    }
-    wait_still_screen();
+    # Navigate to the main Disks page
+    navigate_to_disks();
 
-    # # Launch Krunner
-    # launch_krunner();
-    #
-    # # Enter the shutdown command
-    # type_string_slow('shutdown');
-    # send_key('ret');
-    Utils::Kde::x11_start_program(
-        'shutdown',
-        'valid' => 0,
-        'no_wait' => 1,
-        'match_typed' => 'shutdown_command_typed',
-        # 'target_match' => 'shutdown_screen',
-        'timeout' => 30
-    );
+    # Click the "import data" icon
+    assert_and_click([
+        'single_pool_click_import',
+        'raid1_pool_click_import',
+    ], 'timeout' => 30);
 
-    # Confirm shutdown
-    assert_screen('shutdown_screen');
-    send_key('ret');
+    # Confirm
+    assert_and_click('disks_import_pool_confirm', 'timeout' => 30);
+    # Verify we are back to the Disks page
+    assert_screen('disks_page', 'timeout' => 60);
 
-    # Assert shutdown
-    assert_shutdown();
+    # Navigate to the pools page and verify the presence of the imported pool
+    navigate_to_pools();
+    assert_screen([
+        'pools_page_single-pool_created',
+        'pools_page_raid1-pool_created',
+    ], 'timeout' => 120);
+
 }
 
 sub test_flags {

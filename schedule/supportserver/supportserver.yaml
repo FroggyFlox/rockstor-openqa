@@ -8,4 +8,5 @@ schedule:
     - installation/reboot
     - supportserver/login
     - supportserver/test_ip
+    - supportserver/wait_for_children
     - installation/shutdown

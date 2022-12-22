@@ -14,45 +14,39 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we initiate the client shutdown.
+# This module is used to navigate to the Storage > Pools page
 
 
 use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-use utils;
 
 sub run {
-    # Close Firefox (we assume it's opened and in focus)
-    send_key('alt-f4');
-    check_screen('firefox_confirm_close_tabs', 'timeout' => 10);
-    if (match_has_tag('firefox_confirm_close_tabs')) {
-        send_key('ret');
+
+    # Click on the "Balance" tab
+    assert_and_click('pool_detail_click_balance_tab', 'timeout' => 30);
+
+    # Click on "Start a new balance"
+    assert_and_click('pool_detail_balance_click_start_balance', 'timeout' => 30);
+
+    # Click Start
+    assert_and_click('pool_detail_start_balance_click_start', 'timeout' => 30);
+
+    # Assert status says running
+    assert_and_click('pool_detail_balance_running', 'timeout' => 30);
+
+    # Reload and revisit balance tab until balance has finished
+    for my $retry (1 .. 10) {
+        send_key('f5');
+        # Click on the balance tab
+        assert_and_click('pool_detail_click_balance_tab', 'timeout' => 30);
+        # Assert status says finished:
+        #   - if finished: exit loop
+        #   - if not: keep trying
+        last if check_screen('pools_detail_balance_finished', 'timeout' => 60);
+        die "Unable to see the balance as 'finished'" if $retry == 10;
     }
-    wait_still_screen();
-
-    # # Launch Krunner
-    # launch_krunner();
-    #
-    # # Enter the shutdown command
-    # type_string_slow('shutdown');
-    # send_key('ret');
-    Utils::Kde::x11_start_program(
-        'shutdown',
-        'valid' => 0,
-        'no_wait' => 1,
-        'match_typed' => 'shutdown_command_typed',
-        # 'target_match' => 'shutdown_screen',
-        'timeout' => 30
-    );
-
-    # Confirm shutdown
-    assert_screen('shutdown_screen');
-    send_key('ret');
-
-    # Assert shutdown
-    assert_shutdown();
 }
 
 sub test_flags {

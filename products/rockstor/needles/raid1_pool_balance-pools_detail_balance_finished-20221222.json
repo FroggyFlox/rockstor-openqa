@@ -1,0 +1,22 @@
+{
+  "area": [
+    {
+      "xpos": 166,
+      "ypos": 242,
+      "width": 1082,
+      "height": 243,
+      "type": "match"
+    },
+    {
+      "xpos": 598,
+      "ypos": 434,
+      "width": 309,
+      "height": 40,
+      "type": "exclude"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pools_detail_balance_finished"
+  ]
+}

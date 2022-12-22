@@ -1,0 +1,22 @@
+name:           raid1_webui
+description:    >
+    Runs the Prepared Leap 15.4 client image created by webui_navigation test
+    and tests the creation of a Btrfs raid1 Pool, its details page layout, 
+    running a manual balance, running a manual scrub.
+schedule:
+#    - webui/start_konsole_root
+#    - webui/setup_network
+    - webui/browse_to_rockstor
+#    - webui/first_login
+    - webui/homepage
+#    - storage/pools/navigate_to_pools
+    - storage/pools/raid1/create_raid1_pool
+    - storage/pools/raid1/raid1_pool_details
+    - storage/pools/raid1/raid1_pool_balance
+    - storage/pools/raid1/raid1_pool_scrub
+#    - storage/pools/navigate_to_pools
+    - storage/pools/raid1/raid1_pool_delete
+#    - storage/disks/navigate_to_disks
+    - storage/disks/disks_import_pool
+#    - storage/pools/navigate_to_pools
+#    - webui/shutdown_client

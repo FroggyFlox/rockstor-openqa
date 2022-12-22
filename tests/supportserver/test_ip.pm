@@ -34,9 +34,6 @@ sub run {
 
     # unlock by creating the lock
     mutex_create 'rockstor_ready';
-
-    # wait until all children finish
-    wait_for_children;
 }
 
 sub test_flags {

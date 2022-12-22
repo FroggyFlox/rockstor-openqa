@@ -1,0 +1,26 @@
+{
+  "area": [
+    {
+      "xpos": 3,
+      "ypos": 200,
+      "width": 137,
+      "height": 373,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    },
+    {
+      "xpos": 162,
+      "ypos": 239,
+      "width": 1095,
+      "height": 50,
+      "type": "match",
+      "match": 96,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pools_page"
+  ]
+}

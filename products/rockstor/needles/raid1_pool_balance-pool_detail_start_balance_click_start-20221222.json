@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 162,
+      "ypos": 244,
+      "width": 352,
+      "height": 213,
+      "type": "match",
+      "match": 96,
+      "margin": 50,
+      "click_point": {
+        "xpos": 127,
+        "ypos": 194.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pool_detail_start_balance_click_start"
+  ]
+}

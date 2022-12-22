@@ -1,4 +1,4 @@
-# Copyright (c) 2012-2022 RockStor, Inc. <http://rockstor.com>
+# Copyright (C) 2020-2021 SUSE LLC
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,45 +14,18 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we initiate the client shutdown.
+# This module simply calls mmapi::wait_for_children.
 
 
 use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-use utils;
+use mmapi;
 
 sub run {
-    # Close Firefox (we assume it's opened and in focus)
-    send_key('alt-f4');
-    check_screen('firefox_confirm_close_tabs', 'timeout' => 10);
-    if (match_has_tag('firefox_confirm_close_tabs')) {
-        send_key('ret');
-    }
-    wait_still_screen();
-
-    # # Launch Krunner
-    # launch_krunner();
-    #
-    # # Enter the shutdown command
-    # type_string_slow('shutdown');
-    # send_key('ret');
-    Utils::Kde::x11_start_program(
-        'shutdown',
-        'valid' => 0,
-        'no_wait' => 1,
-        'match_typed' => 'shutdown_command_typed',
-        # 'target_match' => 'shutdown_screen',
-        'timeout' => 30
-    );
-
-    # Confirm shutdown
-    assert_screen('shutdown_screen');
-    send_key('ret');
-
-    # Assert shutdown
-    assert_shutdown();
+    # wait until all children finish
+    wait_for_children;
 }
 
 sub test_flags {

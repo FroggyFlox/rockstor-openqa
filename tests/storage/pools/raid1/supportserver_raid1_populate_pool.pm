@@ -1,4 +1,4 @@
-# Copyright (c) 2012-2022 RockStor, Inc. <http://rockstor.com>
+# Copyright (C) 2020-2021 SUSE LLC
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,45 +14,38 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we initiate the client shutdown.
+# Here, we simply test if we have an IP address. If we do, we let the
+# children know we are ready.
 
 
 use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-use utils;
+use lockapi;
+use mmapi;
 
 sub run {
-    # Close Firefox (we assume it's opened and in focus)
-    send_key('alt-f4');
-    check_screen('firefox_confirm_close_tabs', 'timeout' => 10);
-    if (match_has_tag('firefox_confirm_close_tabs')) {
-        send_key('ret');
-    }
-    wait_still_screen();
+    # Clear the screen
+    enter_cmd('clear');
 
-    # # Launch Krunner
-    # launch_krunner();
-    #
-    # # Enter the shutdown command
-    # type_string_slow('shutdown');
-    # send_key('ret');
-    Utils::Kde::x11_start_program(
-        'shutdown',
-        'valid' => 0,
-        'no_wait' => 1,
-        'match_typed' => 'shutdown_command_typed',
-        # 'target_match' => 'shutdown_screen',
-        'timeout' => 30
-    );
+    # Wait for mutex signal to populate pool
+    ## Follow example in docs: https://open.qa/docs/#_test_synchronization_and_locking_api
+    ## When a parent (this job) needs to wait for a child, let's fetch the child ID first
+    ## and pass this to mutex_wait
+    my $children = get_children();
+    # We only have one child here
+    my $child_id = (keys %$children)[0];
+    # Pass this child_id to mutex_wait
+    mutex_wait('raid1_pool_created', $child_id);
 
-    # Confirm shutdown
-    assert_screen('shutdown_screen');
-    send_key('ret');
+    # Populate pool
+    ## copy / to /mnt2/raid1_pool
+    assert_script_run('ls -lah /mnt2/raid1-pool/');
+    assert_script_run('cp -R /{usr,var} /mnt2/raid1-pool/.');
 
-    # Assert shutdown
-    assert_shutdown();
+    # Send mutex ready signal
+    mutex_create 'raid1_pool_populated';
 }
 
 sub test_flags {

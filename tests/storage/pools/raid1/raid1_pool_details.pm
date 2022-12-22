@@ -14,45 +14,29 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we initiate the client shutdown.
+# This module is used to navigate to the Storage > Pools page
 
 
 use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-use utils;
+use lockapi;
 
 sub run {
-    # Close Firefox (we assume it's opened and in focus)
-    send_key('alt-f4');
-    check_screen('firefox_confirm_close_tabs', 'timeout' => 10);
-    if (match_has_tag('firefox_confirm_close_tabs')) {
-        send_key('ret');
-    }
-    wait_still_screen();
 
-    # # Launch Krunner
-    # launch_krunner();
-    #
-    # # Enter the shutdown command
-    # type_string_slow('shutdown');
-    # send_key('ret');
-    Utils::Kde::x11_start_program(
-        'shutdown',
-        'valid' => 0,
-        'no_wait' => 1,
-        'match_typed' => 'shutdown_command_typed',
-        # 'target_match' => 'shutdown_screen',
-        'timeout' => 30
-    );
+    # Launch mutex to signal supportserver the system is ready
+    # to populate the pool with data
+    mutex_create 'raid1_pool_created';
 
-    # Confirm shutdown
-    assert_screen('shutdown_screen');
-    send_key('ret');
+    # Wait on mutex ready for population of data
+    mutex_wait 'raid1_pool_populated';
 
-    # Assert shutdown
-    assert_shutdown();
+    # Click on Pool name
+    assert_and_click('pools_page_raid1-pool_created_click_name', 'timeout' => 120);
+
+    # Verify page layout and raid configuration
+    assert_screen('raid1-pool_details_page', 'timeout' => 120);
 }
 
 sub test_flags {

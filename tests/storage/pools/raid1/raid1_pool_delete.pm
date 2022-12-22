@@ -14,45 +14,29 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we initiate the client shutdown.
+# This module is used to navigate to the Storage > Pools page
 
 
 use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-use utils;
+use Utils::Rockstor_webui qw(navigate_to_pools);
 
 sub run {
-    # Close Firefox (we assume it's opened and in focus)
-    send_key('alt-f4');
-    check_screen('firefox_confirm_close_tabs', 'timeout' => 10);
-    if (match_has_tag('firefox_confirm_close_tabs')) {
-        send_key('ret');
-    }
-    wait_still_screen();
 
-    # # Launch Krunner
-    # launch_krunner();
-    #
-    # # Enter the shutdown command
-    # type_string_slow('shutdown');
-    # send_key('ret');
-    Utils::Kde::x11_start_program(
-        'shutdown',
-        'valid' => 0,
-        'no_wait' => 1,
-        'match_typed' => 'shutdown_command_typed',
-        # 'target_match' => 'shutdown_screen',
-        'timeout' => 30
-    );
+    # Navigate to the main Pools page
+    navigate_to_pools();
 
-    # Confirm shutdown
-    assert_screen('shutdown_screen');
-    send_key('ret');
+    # Click on the "delete" icon
+    assert_and_click('pools_page_click_delete', 'timeout' => 30);
 
-    # Assert shutdown
-    assert_shutdown();
+    # Click on "Confirm"
+    assert_and_click('pools_page_confirm_delete', 'timeout' => 30);
+
+    # Verify the pool is no longer listed in the table
+    assert_and_click('pools_page_root_only', 'timeout' => 60);
+
 }
 
 sub test_flags {

@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 166,
+      "ypos": 243,
+      "width": 239,
+      "height": 50,
+      "type": "match",
+      "match": 96,
+      "margin": 50,
+      "click_point": {
+        "xpos": 119.5,
+        "ypos": 25
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pool_detail_click_scrubs_tab"
+  ]
+}
