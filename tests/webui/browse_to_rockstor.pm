@@ -68,7 +68,7 @@ sub run {
 
     # If this is the first time connecting to rockstorserver,
     # we need to acknowledge the security exception
-    if (check_var('FIRST_BROWSE', 1)) {
+    if (check_var('FIRST_BROWSE', "yes")) {
         assert_and_click('security_exception');
         assert_and_click('click_advanced');
         # Navigate to the "Accept" button and press "Enter"
