@@ -34,7 +34,6 @@ sub run {
     assert_screen('desktop_ready', 600);
 
     # Start Konsole
-    # launch_konsole();
     Utils::Kde::x11_start_program(
         'konsole',
         'valid' => 1,
@@ -43,7 +42,7 @@ sub run {
         'target_match' => 'konsole_launched',
         'timeout' => 30
     );
-    # Utils::Kde::x11_start_program('konsole', target_match => 'konsole_launched', 'timeout' => 30);
+
     # Wait until the parent (rockstorserver) is ready
     mutex_wait 'rockstor_ready';
 

@@ -11,9 +11,12 @@ use strict;
 use warnings;
 use testapi;
 use mm_network 'setup_static_mm_network';
-# use utils qw(set_hostname);
+use utils qw(quit_packagekit);
 
 sub run {
+    # Stop and Mask PackageKit to prevent notification popups
+    quit_packagekit;
+
     # my ($self) = @_;
     # my $hostname = get_var('HOSTNAME');
 

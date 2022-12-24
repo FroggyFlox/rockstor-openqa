@@ -14,6 +14,7 @@ use Utils::Systemd qw(systemctl disable_and_stop_service);
 our @EXPORT = qw(
     enter_cmd_slow
     enter_cmd_very_slow
+    quit_packagekit
     set_hostname
     type_string_slow
     type_string_very_slow
@@ -112,8 +113,18 @@ sub enter_cmd_very_slow {
     wait_still_screen(1, 3);
 }
 
+=head2 quit_packagekit
 
+ quit_packagekit();
 
+Stop and mask packagekit service and wait until it is really dead.
+This is needed to prevent access conflicts to the RPM database.
+
+=cut
+
+sub quit_packagekit {
+    script_run("systemctl mask packagekit; systemctl stop packagekit; while pgrep packagekitd; do sleep 1; done");
+}
 
 =head2 set_hostname
 
