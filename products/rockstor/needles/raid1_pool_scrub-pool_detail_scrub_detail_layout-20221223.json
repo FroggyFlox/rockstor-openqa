@@ -1,0 +1,30 @@
+{
+  "area": [
+    {
+      "xpos": 162,
+      "ypos": 203,
+      "width": 706,
+      "height": 697,
+      "type": "match",
+      "match": 90
+    },
+    {
+      "xpos": 480,
+      "ypos": 371,
+      "width": 87,
+      "height": 25,
+      "type": "exclude"
+    },
+    {
+      "xpos": 547,
+      "ypos": 475,
+      "width": 207,
+      "height": 426,
+      "type": "exclude"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pool_detail_scrub_detail_layout"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 314,
+      "type": "match",
+      "click_point": {
+        "ypos": 19.5,
+        "xpos": 394.5
+      },
+      "width": 443,
+      "height": 38,
+      "ypos": 472,
+      "match": 85,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "create_pool_select_all_disks"
+  ]
+}

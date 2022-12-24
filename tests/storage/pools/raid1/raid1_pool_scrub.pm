@@ -34,13 +34,14 @@ sub run {
     assert_and_click('pool_detail_start_scrub_click_start', 'timeout' => 30);
 
     # Assert status says running
-    assert_and_click('pool_detail_scrub_running', 'timeout' => 30);
+    assert_screen('pool_detail_scrub_running', 'timeout' => 30);
 
     # Reload and revisit scrubs tab until balance has finished
     for my $retry (1 .. 10) {
-        send_key('f5');
+        send_key('f5', 'wait_screen_change' => 1);
+        sleep(5);
         # Click on the scrub tab
-        assert_and_click('pool_detail_click_scrubs_tab', 'timeout' => 30);
+        assert_and_click('pool_detail_click_scrubs_tab', 'timeout' => 30, 'clicktime' => 1);
         # Assert status says finished:
         #   - if finished: exit loop
         #   - if not: keep trying
@@ -49,7 +50,7 @@ sub run {
     }
 
     # Click on "finished" status to see stats
-    assert_and_click('pool_detail_scrubs_click_finished', 'timeout' => 30);
+    assert_and_click('pools_detail_scrub_finished', 'timeout' => 30);
 
     # Assert general layout and information
     assert_screen('pool_detail_scrub_detail_layout', 'timeout' => 60);

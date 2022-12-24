@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 429,
+      "ypos": 454,
+      "width": 428,
+      "height": 129,
+      "type": "match",
+      "match": 90,
+      "margin": 50,
+      "click_point": {
+        "xpos": 398,
+        "ypos": 107.5
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "disks_import_pool_confirm"
+  ]
+}

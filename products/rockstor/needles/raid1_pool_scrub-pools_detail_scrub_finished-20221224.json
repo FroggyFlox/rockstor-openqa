@@ -1,0 +1,27 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 47,
+      "xpos": 179,
+      "width": 433,
+      "ypos": 294
+    },
+    {
+      "xpos": 314,
+      "ypos": 400,
+      "width": 176,
+      "height": 65,
+      "type": "match",
+      "click_point": {
+        "xpos": 28,
+        "ypos": 45.5
+      },
+      "match": 96
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pools_detail_scrub_finished"
+  ]
+}

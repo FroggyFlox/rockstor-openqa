@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "xpos": 168,
+      "width": 1092,
+      "height": 103,
+      "ypos": 242,
+      "match": 90
+    },
+    {
+      "ypos": 300,
+      "width": 87,
+      "height": 41,
+      "type": "exclude",
+      "xpos": 325
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pools_page_raid1-pool_created"
+  ]
+}

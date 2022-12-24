@@ -1,0 +1,17 @@
+{
+  "area": [
+    {
+      "xpos": 164,
+      "ypos": 235,
+      "width": 74,
+      "height": 192,
+      "type": "match",
+      "match": 90,
+      "margin": 50
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pools_page_root_only"
+  ]
+}

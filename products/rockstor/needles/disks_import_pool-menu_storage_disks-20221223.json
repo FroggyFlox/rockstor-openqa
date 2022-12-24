@@ -1,0 +1,21 @@
+{
+  "area": [
+    {
+      "xpos": 294,
+      "ypos": 135,
+      "width": 139,
+      "height": 358,
+      "type": "match",
+      "match": 90,
+      "margin": 50,
+      "click_point": {
+        "xpos": 43.5,
+        "ypos": 43
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "menu_storage_disks"
+  ]
+}

@@ -35,7 +35,7 @@ sub run {
     assert_and_click('pools_page_confirm_delete', 'timeout' => 30);
 
     # Verify the pool is no longer listed in the table
-    assert_and_click('pools_page_root_only', 'timeout' => 60);
+    assert_screen('pools_page_root_only', 'timeout' => 60);
 
 }
 

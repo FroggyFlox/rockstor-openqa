@@ -1,0 +1,50 @@
+{
+  "area": [
+    {
+      "type": "match",
+      "height": 703,
+      "ypos": 191,
+      "width": 1098,
+      "xpos": 161
+    },
+    {
+      "ypos": 370,
+      "height": 18,
+      "width": 360,
+      "xpos": 262,
+      "type": "exclude"
+    },
+    {
+      "type": "exclude",
+      "height": 21,
+      "width": 232,
+      "xpos": 229,
+      "ypos": 424
+    },
+    {
+      "type": "exclude",
+      "height": 111,
+      "xpos": 194,
+      "width": 298,
+      "ypos": 503
+    },
+    {
+      "width": 941,
+      "height": 49,
+      "ypos": 783,
+      "xpos": 274,
+      "type": "exclude"
+    },
+    {
+      "xpos": 904,
+      "ypos": 825,
+      "width": 345,
+      "height": 62,
+      "type": "exclude"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "raid1-pool_details_page"
+  ]
+}

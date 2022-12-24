@@ -1,0 +1,23 @@
+{
+  "area": [
+    {
+      "xpos": 176,
+      "ypos": 244,
+      "width": 1070,
+      "height": 181,
+      "type": "match",
+      "match": 90
+    },
+    {
+      "xpos": 363,
+      "ypos": 390,
+      "width": 871,
+      "height": 26,
+      "type": "exclude"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pool_detail_scrub_running"
+  ]
+}
