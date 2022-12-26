@@ -20,3 +20,13 @@ scenarios:
         settings:
           YAML_SCHEDULE: schedule/storage/pools/raid1/raid1_webui.yaml
           PARALLEL_WITH: raid1_supportserver
+    - single_supportserver:
+        machine: 64bit_tap
+        settings:
+          YAML_SCHEDULE: schedule/storage/pools/single/single_supportserver.yaml
+          START_AFTER_TEST: supportserver_rockstor_webui@64bit_tap
+    - single_webui:
+        machine: 64bit_tap
+        settings:
+          YAML_SCHEDULE: schedule/storage/pools/single/single_webui.yaml
+          PARALLEL_WITH: single_supportserver
