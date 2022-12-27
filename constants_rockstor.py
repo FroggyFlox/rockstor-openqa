@@ -25,3 +25,14 @@ TEST_MACHINE_SETTINGS = [
         ],
     },
 ]
+
+TEST_TEST_SUITES = {
+    "test_suite_1": {
+        "description": "description 1",
+        "settings": [],
+    },
+    "test_suite_2": {
+        "description": "description 2",
+        "settings": [{"key": "VARIABLE1", "value": "VALUE1"}],
+    },
+}
