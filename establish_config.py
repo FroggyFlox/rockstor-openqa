@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 
 from openqa_client.client import OpenQA_Client
-from constants_rockstor import TEST_MACHINE_SETTINGS, TEST_TEST_SUITES
+from constants_rockstor import (
+    TEST_MACHINE_SETTINGS,
+    FINAL_TEST_SUITES,
+)
 
 
 client = OpenQA_Client(server="openqa-server", scheme="http")
@@ -26,9 +29,9 @@ def establish_machines():
 
 def establish_test_suites():
     current_test_suites = client.openqa_request("GET", "test_suites")["TestSuites"]
-    for suite_name in TEST_TEST_SUITES:
+    for suite_name in FINAL_TEST_SUITES:
         # Define parameters of the test suite to be created
-        params = {**TEST_TEST_SUITES[suite_name], "name": suite_name}
+        params = {**FINAL_TEST_SUITES[suite_name], "name": suite_name}
         # Search whether a test suite with the same name already exists
         matching_test_suite = [
             matching_dict
