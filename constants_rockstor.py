@@ -7,23 +7,20 @@ from typing import Dict
 
 TEST_MACHINE_SETTINGS = [
     {
-        "name": "testmachine",
+        "name": "TEST_64bit",
         "backend": "qemu",
         "settings": [
-            {"key": "HDDSIZEGB", "value": 10},
             {"key": "QEMUCPU", "value": "qemu64"},
-            {"key": "VIRTIO_CONSOLE", "value": 1},
             {"key": "WORKER_CLASS", "value": "qemu_x86_64"},
         ],
     },
     {
-        "name": "testmachine2",
+        "name": "TEST_64bit_tap",
         "backend": "qemu",
         "settings": [
-            {"key": "HDDSIZEGB", "value": 20},
             {"key": "QEMUCPU", "value": "qemu64"},
-            {"key": "VIRTIO_CONSOLE", "value": 1},
-            {"key": "WORKER_CLASS", "value": "qemu_x86_64"},
+            {"key": "NICTYPE", "value": "tap"},
+            {"key": "WORKER_CLASS", "value": "qemu_x86_64,tap"},
         ],
     },
 ]
