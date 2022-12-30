@@ -26,4 +26,4 @@ scenarios:
           YAML_SCHEDULE: schedule/prepare_systems/webui_navigation.yaml
           PARALLEL_WITH: supportserver_rockstor_webui
           PUBLISH_HDD_1: "Leap15-4_KDE_Client-prepared.qcow2"
-          FIRST_BROWSE: yes
+          FIRST_BROWSE: "yes"

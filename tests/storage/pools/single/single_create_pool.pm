@@ -35,30 +35,30 @@ sub run {
     # Enter name
     ## Focus on the 'Name' field
     assert_and_click('create_pool_name_field', 'timeout' => 30);
-    wait_screen_change { type_string('raid1-pool', max_interval => utils::SLOW_TYPING_SPEED); };
+    wait_screen_change { type_string('single-pool', max_interval => utils::SLOW_TYPING_SPEED); };
     send_key('tab');
 
     # Choose raid level
     ## Click drop-down menu
     assert_and_click('create_pool_raid_configuration_click_drop_down', 'timeout' => 30);
     ## Click raid level
-    assert_and_click('create_pool_raid_configuration_click_raid1', 'timeout' => 30);
+    assert_and_click('create_pool_raid_configuration_click_single', 'timeout' => 30);
     send_key('tab');
 
     # Click submit
     ## Because no disk was selected, the UI should alert the user
-    ## that 2 disks are required for raid1
-    assert_and_click('create_pool_raid1_no_disk_submit', 'timeout' => 30);
-    assert_screen('create_pool_raid1_missing_disks', 'timeout' => 30);
+    ## that at least 1 disk is required for a Btrfs single level pool
+    assert_and_click('create_pool_single_no_disk_submit', 'timeout' => 30);
+    assert_screen('create_pool_single_missing_disks', 'timeout' => 30);
 
     # Select disks
     ## Click select all
     assert_and_click('create_pool_select_all_disks', 'timeout' => 30);
     # Verify results and click Submit
-    assert_and_click('create_pool_raid1_verify_and_submit', 'timeout' => 30);
+    assert_and_click('create_pool_single_verify_and_submit', 'timeout' => 30);
 
     # Verify Pool created
-    assert_screen('pools_page_raid1-pool_created', 'timeout' => 120);
+    assert_screen('pools_page_single-pool_created', 'timeout' => 120);
 }
 
 sub test_flags {
