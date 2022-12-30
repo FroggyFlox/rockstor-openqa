@@ -4,6 +4,8 @@ used by Rockstor openQA.
 """
 
 from typing import Dict
+import pathlib
+
 
 TEST_MACHINE_SETTINGS = [
     {
@@ -71,6 +73,16 @@ def generate_final_test_suites() -> Dict:
     return final_test_suites
 
 
+def generate_job_groups_map() -> Dict:
+    job_groups_dir = "job_groups"
+    jb_gps_path = pathlib.Path(job_groups_dir)
+    list_files = list(jb_gps_path.rglob("*.yaml"))
+    jb_gps_map = {}
+    for file in list_files:
+        jb_gps_map[file.stem] = file
+    return jb_gps_map
+
+
 class RockstorTestSuite:
     first_boot: bool
     name: str
@@ -83,7 +95,7 @@ class RockstorTestSuite:
     }
 
     @staticmethod
-    def new_supportserver_test_suite(name, first_boot=False):
+    def new_supportserver_test_suite(name: str, first_boot: bool = False) -> Dict:
         hdd_1 = (
             "%DISTRI%-%VERSION%-%FLAVOR%-%ARCH%-%BUILD%-non-efi.qcow2"
             if first_boot
@@ -104,7 +116,7 @@ class RockstorTestSuite:
         }
         return base_dict
 
-    def new_supportserver_pool_test_suite(self, raid_level):
+    def new_supportserver_pool_test_suite(self, raid_level: str) -> Dict:
         name = f"TEST_{raid_level}_supportserver"
         out_dict = self.new_supportserver_test_suite(name=name)
         out_dict[name]["settings"].extend(
@@ -116,7 +128,7 @@ class RockstorTestSuite:
         return out_dict
 
     @staticmethod
-    def new_webui_test_suite(name, first_boot=False):
+    def new_webui_test_suite(name: str, first_boot: bool = False) -> Dict:
         hdd_1 = (
             "Leap15-4_KDE_Client.qcow2"
             if first_boot
@@ -138,10 +150,11 @@ class RockstorTestSuite:
         }
         return base_dict
 
-    def new_webui_pool_test_suite(self, raid_level):
+    def new_webui_pool_test_suite(self, raid_level: str) -> Dict:
         name = f"TEST_{raid_level}_webui"
         out_dict = self.new_webui_test_suite(name=name)
         return out_dict
 
 
 FINAL_TEST_SUITES = generate_final_test_suites()
+FINAL_JOB_GROUPS = generate_job_groups_map()
