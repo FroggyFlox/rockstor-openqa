@@ -139,6 +139,7 @@ class RockstorTestSuite:
                     {"key": "HOSTNAME", "value": "rockstorserver"},
                     {"key": "TAPDEV", "value": "tap0"},
                     {"key": "WORKER_CLASS", "value": "qemu_x86_64,tap"},
+                    {"key": "QEMURAM", "value": "2048"},
                 ]
             }
         }
@@ -191,6 +192,7 @@ class RockstorTestSuite:
                     {"key": "YRES", "value": "960"},
                     {"key": "TAPDEV", "value": "tap1"},
                     {"key": "WORKER_CLASS", "value": "qemu_x86_64,tap"},
+                    {"key": "QEMURAM", "value": "4096"},
                 ]
             }
         }

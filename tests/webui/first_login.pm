@@ -30,7 +30,7 @@ use utils;
 sub run {
 
     # Verify first-login form is displayed and accept EULA
-    assert_and_click('first_login_form_eula');
+    assert_and_click('first_login_form_eula', 'timeout' => 120);
     # Enter hostname
     assert_and_click('eula_checked'); # Verify EULA is accepted and enter hostname field
     wait_screen_change { type_string('rockstor', max_interval => utils::SLOW_TYPING_SPEED); };
