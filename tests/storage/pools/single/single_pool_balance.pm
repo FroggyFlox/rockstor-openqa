@@ -36,7 +36,7 @@ sub run {
     # Assert status says running
     assert_and_click('pool_detail_balance_running', 'timeout' => 30);
 
-    # Reload and revisit balance tab until balance has finished
+    # Reload and revisit balance tabs until balance has finished
     for my $retry (1 .. 10) {
         send_key('f5');
         # Click on the balance tab

@@ -1,0 +1,58 @@
+{
+  "area": [
+    {
+      "xpos": 163,
+      "ypos": 200,
+      "width": 1088,
+      "height": 665,
+      "type": "match",
+      "match": 90
+    },
+    {
+      "xpos": 526,
+      "ypos": 783,
+      "width": 698,
+      "height": 22,
+      "type": "exclude"
+    },
+    {
+      "xpos": 978,
+      "ypos": 803,
+      "width": 280,
+      "height": 69,
+      "type": "exclude"
+    },
+    {
+      "xpos": 262,
+      "ypos": 370,
+      "width": 191,
+      "height": 19,
+      "type": "exclude"
+    },
+    {
+      "xpos": 195,
+      "ypos": 501,
+      "width": 298,
+      "height": 113,
+      "type": "exclude"
+    },
+    {
+      "xpos": 228,
+      "ypos": 425,
+      "width": 249,
+      "height": 18,
+      "type": "exclude"
+    },
+    {
+      "xpos": 275,
+      "ypos": 783,
+      "width": 85,
+      "height": 22,
+      "type": "exclude"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "single-pool_details_page"
+  ]
+}

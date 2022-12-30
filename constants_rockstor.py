@@ -103,10 +103,13 @@ class RockstorTestSuite:
     name: str
     raid_level: str
 
+    # Define the number of disks required for Pools-related test suites.
+    # Note that we use Btrfs min disk + 1 (OS disk). For Raid1, for instance,
+    # we need 2 disks for raid1 + 1 OS disk = 3
     NUMDISKS_RAID_LEVEL = {
-        "single": 1,
-        "raid1": 2,
-        "raid10": 4,
+        "single": 2,
+        "raid1": 3,
+        "raid10": 5,
     }
 
     @staticmethod
@@ -118,7 +121,7 @@ class RockstorTestSuite:
         :param name: name of test suite
         :param first_boot: set to True for a test suite booting off of a freshly
         installed Rockstor system, pre-first login. Set to False to boot off an already
-        prepared system (network configured, Rocsktor first login procedure completed).
+        prepared system (network configured, Rockstor first login procedure completed).
         :return:
         """
         hdd_1 = (

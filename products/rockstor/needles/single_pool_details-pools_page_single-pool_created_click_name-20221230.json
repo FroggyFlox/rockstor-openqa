@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "xpos": 161,
+      "ypos": 261,
+      "width": 89,
+      "height": 144,
+      "type": "match",
+      "match": 85,
+      "click_point": {
+        "xpos": 39.5,
+        "ypos": 109
+      }
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pools_page_single-pool_created_click_name"
+  ]
+}

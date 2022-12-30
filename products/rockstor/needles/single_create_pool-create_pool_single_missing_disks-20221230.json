@@ -1,0 +1,16 @@
+{
+  "area": [
+    {
+      "xpos": 412,
+      "ypos": 297,
+      "width": 340,
+      "height": 62,
+      "type": "match",
+      "match": 90
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "create_pool_single_missing_disks"
+  ]
+}

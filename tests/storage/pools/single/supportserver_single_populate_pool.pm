@@ -37,15 +37,15 @@ sub run {
     # We only have one child here
     my $child_id = (keys %$children)[0];
     # Pass this child_id to mutex_wait
-    mutex_wait('raid1_pool_created', $child_id);
+    mutex_wait('single_pool_created', $child_id);
 
     # Populate pool
-    ## copy / to /mnt2/raid1_pool
-    assert_script_run('ls -lah /mnt2/raid1-pool/');
-    assert_script_run('cp -R /{usr,var} /mnt2/raid1-pool/.');
+    ## copy / to /mnt2/single_pool
+    assert_script_run('ls -lah /mnt2/single-pool/');
+    assert_script_run('cp -R /{usr,var} /mnt2/single-pool/.');
 
     # Send mutex ready signal
-    mutex_create 'raid1_pool_populated';
+    mutex_create 'single_pool_populated';
 }
 
 sub test_flags {

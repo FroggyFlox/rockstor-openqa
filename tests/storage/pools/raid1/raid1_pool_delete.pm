@@ -29,7 +29,8 @@ sub run {
     navigate_to_pools();
 
     # Click on the "delete" icon
-    assert_and_click('pools_page_click_delete', 'timeout' => 30);
+    assert_and_click([qw(pools_page_click_delete pools_page_single_click_delete)],
+        'timeout' => 30);
 
     # Click on "Confirm"
     assert_and_click('pools_page_confirm_delete', 'timeout' => 30);

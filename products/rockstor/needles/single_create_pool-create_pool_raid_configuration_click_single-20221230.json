@@ -1,0 +1,20 @@
+{
+  "area": [
+    {
+      "xpos": 273,
+      "ypos": 301,
+      "width": 479,
+      "height": 66,
+      "type": "match",
+      "click_point": {
+        "xpos": 261.5,
+        "ypos": 54
+      },
+      "match": 96
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "create_pool_raid_configuration_click_single"
+  ]
+}

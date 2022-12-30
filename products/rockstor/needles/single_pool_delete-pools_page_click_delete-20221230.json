@@ -1,0 +1,41 @@
+{
+  "area": [
+    {
+      "xpos": 171,
+      "ypos": 352,
+      "width": 1041,
+      "height": 42,
+      "type": "match",
+      "match": 90,
+      "click_point": {
+        "xpos": 1026.5,
+        "ypos": 12
+      }
+    },
+    {
+      "xpos": 328,
+      "ypos": 350,
+      "width": 176,
+      "height": 49,
+      "type": "exclude"
+    },
+    {
+      "xpos": 550,
+      "ypos": 350,
+      "width": 628,
+      "height": 43,
+      "type": "exclude"
+    },
+    {
+      "xpos": 1184,
+      "ypos": 484,
+      "width": 10,
+      "height": 10,
+      "type": "match"
+    }
+  ],
+  "properties": [],
+  "tags": [
+    "pools_page_single_click_delete"
+  ]
+}

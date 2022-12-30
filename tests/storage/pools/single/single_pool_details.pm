@@ -27,16 +27,16 @@ sub run {
 
     # Launch mutex to signal supportserver the system is ready
     # to populate the pool with data
-    mutex_create 'raid1_pool_created';
+    mutex_create 'single_pool_created';
 
     # Wait on mutex ready for population of data
-    mutex_wait 'raid1_pool_populated';
+    mutex_wait 'single_pool_populated';
 
     # Click on Pool name
-    assert_and_click('pools_page_raid1-pool_created_click_name', 'timeout' => 120);
+    assert_and_click('pools_page_single-pool_created_click_name', 'timeout' => 120);
 
     # Verify page layout and raid configuration
-    assert_screen('raid1-pool_details_page', 'timeout' => 120);
+    assert_screen('single-pool_details_page', 'timeout' => 120);
 }
 
 sub test_flags {
