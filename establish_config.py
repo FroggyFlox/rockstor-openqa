@@ -12,6 +12,12 @@ client = OpenQA_Client(server="openqa-server", scheme="http")
 
 
 def get_parent_groups(job_group_map: dict) -> list:
+    """
+    Builds a list of unique parent_groups from a Dict of pathlib.Path().
+
+    :param job_group_map: Dict of {job_group_name: path-to-yaml-schedule}
+    :return: List of unique parent_groups.
+    """
     list_parents = [
         job_group_map[job_group].parts[1:-1][0] for job_group in job_group_map
     ]
@@ -19,6 +25,12 @@ def get_parent_groups(job_group_map: dict) -> list:
 
 
 def read_template_file(template_name: str) -> str:
+    """
+    Read .yaml template file from path defined in FINAL_JOB_GROUPS.
+
+    :param template_name: name of the job_group
+    :return:
+    """
     path = FINAL_JOB_GROUPS[template_name]
     with open(path, "r") as infile:
         template = infile.read()
@@ -26,6 +38,16 @@ def read_template_file(template_name: str) -> str:
 
 
 def establish_machines():
+    """
+    Ensures the MACHINES defined on the openQA server matches the definitions
+    in the FINAL_MACHINE_SETTINGS constant. All machine names must be unique.
+    As a result, if a machine of the same name exists, we update its definition
+    on the server based on the definition present in FINAL_MACHINE_SETTINGS.
+    All settings NOT defined in FINAL_MACHINE_SETTINGS will be removed by the
+    process. If no machine with the same name exists, simply create it.
+
+    :return:
+    """
     current_machines = client.openqa_request("GET", "machines")["Machines"]
     for machine in FINAL_MACHINE_SETTINGS:
         # Search whether a machine with the same name already exists
@@ -50,6 +72,16 @@ def establish_machines():
 
 
 def establish_test_suites():
+    """
+    Ensures the TEST SUITES defined on the openQA server matches the definitions
+    in the FINAL_TEST_SUITES constant. All test suite names must be unique.
+    As a result, if a test suite of the same name exists, we update its definition
+    on the server based on the definition present in FINAL_TEST_SUITES.
+    All settings NOT defined in FINAL_TEST_SUITES will be removed by the
+    process. If no test suite with the same name exists, simply create it.
+
+    :return:
+    """
     current_test_suites = client.openqa_request("GET", "test_suites")["TestSuites"]
     for suite_name in FINAL_TEST_SUITES:
         # Define parameters of the test suite to be created
@@ -74,6 +106,16 @@ def establish_test_suites():
 
 
 def establish_job_groups():
+    """
+    Ensures the JOB GROUPS defined on the openQA server matches the definitions
+    in the FINAL_JOB_GROUPS constant. All job group names must be unique.
+    As a result, if a job group of the same name exists, we update its definition
+    on the server based on the definition present in FINAL_JOB_GROUPS.
+    All settings NOT defined in FINAL_JOB_GROUPS will be removed by the
+    process. If no job group with the same name exists, simply create it.
+
+    :return:
+    """
     # GET existing parent job groups and create if non-existent
     current_parent_groups = client.openqa_request("GET", "parent_groups")
     target_parent_groups = get_parent_groups(FINAL_JOB_GROUPS)

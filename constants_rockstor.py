@@ -31,6 +31,15 @@ RAID_LEVEL = ["single", "raid1", "raid10"]
 
 
 def generate_final_test_suites() -> Dict:
+    """
+    Build all TEST SUITES by adding them one by one to the final_test_suites
+    dictionary. A test suite can be:
+      - manual: simply a dict defining name, and settings (see 'install_textmode')
+      - semi-automatic: supportserver or webui test suite. Use the corresponding
+        methods from the RockstorTestSuite() class for semi-automatically generation
+
+    :return: Dict
+    """
     final_test_suites = {}
     # Add install_textmode
     final_test_suites.update(
@@ -74,6 +83,12 @@ def generate_final_test_suites() -> Dict:
 
 
 def generate_job_groups_map() -> Dict:
+    """
+    Reads all *.yaml files present in the 'job_groups' dir and builds
+    a dictionary as {job_group_name: path-to-yaml-template}.
+
+    :return: Dict
+    """
     job_groups_dir = "job_groups"
     jb_gps_path = pathlib.Path(job_groups_dir)
     list_files = list(jb_gps_path.rglob("*.yaml"))
@@ -96,6 +111,16 @@ class RockstorTestSuite:
 
     @staticmethod
     def new_supportserver_test_suite(name: str, first_boot: bool = False) -> Dict:
+        """
+        Builds a test suite destined to be used as a supportserver. It pre-defines a
+        set of corresponding settings.
+
+        :param name: name of test suite
+        :param first_boot: set to True for a test suite booting off of a freshly
+        installed Rockstor system, pre-first login. Set to False to boot off an already
+        prepared system (network configured, Rocsktor first login procedure completed).
+        :return:
+        """
         hdd_1 = (
             "%DISTRI%-%VERSION%-%FLAVOR%-%ARCH%-%BUILD%-non-efi.qcow2"
             if first_boot
@@ -117,6 +142,14 @@ class RockstorTestSuite:
         return base_dict
 
     def new_supportserver_pool_test_suite(self, raid_level: str) -> Dict:
+        """
+        Builds a test suite destined to be used as a support server for testing
+        Pool-related operations. As a result, the number of disks, their size, and
+        raid_level are customized.
+
+        :param raid_level: MUST be one of the RAID_LEVEL constant
+        :return:
+        """
         name = f"{raid_level}_supportserver"
         out_dict = self.new_supportserver_test_suite(name=name)
         out_dict[name]["settings"].extend(
@@ -129,6 +162,16 @@ class RockstorTestSuite:
 
     @staticmethod
     def new_webui_test_suite(name: str, first_boot: bool = False) -> Dict:
+        """
+        Builds a test suite destined to be used as webUI testing connecting to
+        a supportserver.
+
+        :param name: name of the test suite
+        :param first_boot: set to True for a test suite booting off of a freshly
+        installed Rockstor system, pre-first login. Set to False to boot off an already
+        prepared system (network configured, Rocsktor first login procedure completed).
+        :return:
+        """
         hdd_1 = (
             "Leap15-4_KDE_Client.qcow2"
             if first_boot
@@ -151,6 +194,13 @@ class RockstorTestSuite:
         return base_dict
 
     def new_webui_pool_test_suite(self, raid_level: str) -> Dict:
+        """
+        Builds a test suite destined to be used as webUI testing connecting to
+        a supportserver, related to Pools operations.
+
+        :param raid_level: MUST be one defined in RAID_LEVEL constant
+        :return:
+        """
         name = f"{raid_level}_webui"
         out_dict = self.new_webui_test_suite(name=name)
         return out_dict
