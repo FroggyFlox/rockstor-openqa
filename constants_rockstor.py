@@ -7,9 +7,9 @@ from typing import Dict
 import pathlib
 
 
-TEST_MACHINE_SETTINGS = [
+FINAL_MACHINE_SETTINGS = [
     {
-        "name": "TEST_64bit",
+        "name": "64bit",
         "backend": "qemu",
         "settings": [
             {"key": "QEMUCPU", "value": "qemu64"},
@@ -17,7 +17,7 @@ TEST_MACHINE_SETTINGS = [
         ],
     },
     {
-        "name": "TEST_64bit_tap",
+        "name": "64bit_tap",
         "backend": "qemu",
         "settings": [
             {"key": "QEMUCPU", "value": "qemu64"},
@@ -35,7 +35,7 @@ def generate_final_test_suites() -> Dict:
     # Add install_textmode
     final_test_suites.update(
         {
-            "TEST_install_textmode": {
+            "install_textmode": {
                 "settings": [
                     {"key": "DESKTOP", "value": "textmode"},
                     {"key": "INSTALLONLY", "value": "1"},
@@ -46,13 +46,13 @@ def generate_final_test_suites() -> Dict:
     # Add base supportserver
     final_test_suites.update(
         RockstorTestSuite().new_supportserver_test_suite(
-            name="TEST_supportserver_webui", first_boot=True
+            name="supportserver_webui", first_boot=True
         )
     )
     # Add base webui
     final_test_suites.update(
         RockstorTestSuite().new_webui_test_suite(
-            name="TEST_webui_navigation", first_boot=True
+            name="webui_navigation", first_boot=True
         )
     )
     # Add pools supportservers
@@ -117,7 +117,7 @@ class RockstorTestSuite:
         return base_dict
 
     def new_supportserver_pool_test_suite(self, raid_level: str) -> Dict:
-        name = f"TEST_{raid_level}_supportserver"
+        name = f"{raid_level}_supportserver"
         out_dict = self.new_supportserver_test_suite(name=name)
         out_dict[name]["settings"].extend(
             [
@@ -151,7 +151,7 @@ class RockstorTestSuite:
         return base_dict
 
     def new_webui_pool_test_suite(self, raid_level: str) -> Dict:
-        name = f"TEST_{raid_level}_webui"
+        name = f"{raid_level}_webui"
         out_dict = self.new_webui_test_suite(name=name)
         return out_dict
 

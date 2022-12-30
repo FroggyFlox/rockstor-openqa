@@ -2,7 +2,7 @@
 
 from openqa_client.client import OpenQA_Client
 from constants_rockstor import (
-    TEST_MACHINE_SETTINGS,
+    FINAL_MACHINE_SETTINGS,
     FINAL_TEST_SUITES,
     FINAL_JOB_GROUPS,
 )
@@ -27,19 +27,26 @@ def read_template_file(template_name: str) -> str:
 
 def establish_machines():
     current_machines = client.openqa_request("GET", "machines")["Machines"]
-    for machine in TEST_MACHINE_SETTINGS:
+    for machine in FINAL_MACHINE_SETTINGS:
         # Search whether a machine with the same name already exists
         matching_machine = [
             matching_dict
             for matching_dict in current_machines
             if matching_dict["name"] == machine["name"]
         ]
-        # Delete any existing machine with the same name
-        if len(matching_machine) > 0:
+        if len(matching_machine) > 1:
+            raise ValueError(
+                f"More than 1 machine found with the name {machine['name']}"
+            )
+        elif len(matching_machine) == 1:
+            print(f"A machine named {machine['name']} already exists... update it.")
             matching_machine_id = matching_machine[0]["id"]
-            client.openqa_request("DELETE", f"machines/{matching_machine_id}")
-        # Define our machine
-        client.openqa_request("POST", "machines", params=machine)
+            client.openqa_request(
+                "PUT", f"machines/{matching_machine_id}", params=machine
+            )
+        else:
+            client.openqa_request("POST", "machines", params=machine)
+            print(f"Created the machine named {machine['name']}.")
 
 
 def establish_test_suites():
@@ -53,12 +60,17 @@ def establish_test_suites():
             for matching_dict in current_test_suites
             if matching_dict["name"] == suite_name
         ]
-        # Delete any existing test suite with the same name
-        if len(matching_test_suite) > 0:
+        if len(matching_test_suite) > 1:
+            raise ValueError(f"More than 1 test suite found with the name {suite_name}")
+        elif len(matching_test_suite) == 1:
+            print(f"A test suite named {suite_name} already exists... update it.")
             matching_test_suite_id = matching_test_suite[0]["id"]
-            client.openqa_request("DELETE", f"test_suites/{matching_test_suite_id}")
-        # Define our test suite
-        client.openqa_request("POST", "test_suites", params=params)
+            client.openqa_request(
+                "PUT", f"test_suites/{matching_test_suite_id}", params=params
+            )
+        else:
+            client.openqa_request("POST", "test_suites", params=params)
+            print(f"Created the test suite named {suite_name}.")
 
 
 def establish_job_groups():
@@ -80,7 +92,6 @@ def establish_job_groups():
             # to the target_parent_groups_map dict
             matching_parent_group_id = matching_parent_group[0]["id"]
             target_parent_groups_map[parent_group] = matching_parent_group_id
-            # client.openqa_request("DELETE", f"parent_groups/{matching_parent_group_id}")
         else:
             # Create the parent_group and save its id
             pg_id = client.openqa_request(
@@ -109,7 +120,6 @@ def establish_job_groups():
                 f"Found {len(matching_job_group)} job groups named {job_group}."
             )
         elif len(matching_job_group) == 1:
-            # UPDATE the job group that already exists
             print(f"A job group named {job_group} already exists... update it.")
             jb_grp_id = matching_job_group[0]["id"]
             client.openqa_request("PUT", f"job_groups/{jb_grp_id}", data=params)
@@ -129,6 +139,11 @@ def establish_job_groups():
         )
 
 
+print("############# Begin establishing MACHINES #############")
 establish_machines()
+print("\n")
+print("############# Begin establishing TEST SUITES #############")
 establish_test_suites()
+print("\n")
+print(f"############# Begin establishing JOB GROUPS #############")
 establish_job_groups()
