@@ -22,21 +22,36 @@ use warnings;
 use strict;
 use testapi;
 use lockapi;
+use mmapi;
+use Utils::Rockstor_webui;
 
 sub run {
 
-    # Launch mutex to signal supportserver the system is ready
-    # to populate the pool with data
-    mutex_create 'raid1_pool_created';
+    # Get pool name from ENV or set it if not yet defined
+    set_pool_name unless get_var('POOL_NAME');
+    my $pool_name = get_var('POOL_NAME');
+    my $raid_level = get_var('RAID_LEVEL');
 
-    # Wait on mutex ready for population of data
-    mutex_wait 'raid1_pool_populated';
+    # Clear the screen
+    enter_cmd('clear');
 
-    # Click on Pool name
-    assert_and_click('pools_page_raid1-pool_created_click_name', 'timeout' => 120);
+    # Wait for mutex signal to populate pool
+    ## Follow example in docs: https://open.qa/docs/#_test_synchronization_and_locking_api
+    ## When a parent (this job) needs to wait for a child, let's fetch the child ID first
+    ## and pass this to mutex_wait
+    my $children = get_children();
+    # We only have one child here
+    my $child_id = (keys %$children)[0];
+    # Pass this child_id to mutex_wait
+    mutex_wait($raid_level . '_pool_created', $child_id);
 
-    # Verify page layout and raid configuration
-    assert_screen('raid1-pool_details_page', 'timeout' => 120);
+    # Populate pool
+    ## copy / to /mnt2/pool_name
+    assert_script_run('ls -lah /mnt2/' . $pool_name . '/');
+    assert_script_run('cp -R /{usr,var} /mnt2/' . $pool_name . '/.');
+
+    # Send mutex ready signal
+    mutex_create $raid_level . '_pool_populated';
 }
 
 sub test_flags {

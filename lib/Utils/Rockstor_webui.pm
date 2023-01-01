@@ -26,6 +26,7 @@ use testapi;
 our @EXPORT = qw(
   navigate_to_disks
   navigate_to_pools
+  set_pool_name
 );
 
 =head1 Utils::Rockstor_webui
@@ -64,6 +65,21 @@ sub navigate_to_pools {
     assert_and_click('menu_storage_pools', 'timeout' => 30);
     # Verify the main Pools page layout
     assert_screen('pools_page', 'timeout' => 60);
+}
+
+
+=head2 set_pool_name
+
+    set_pool_name();
+
+Create and set the POOL_NAME variable based on RAID_LEVEL (set in test_suite).
+
+=cut
+sub set_pool_name {
+    my $raid_level = get_var('RAID_LEVEL');
+    my $pool_name = $raid_level . '-pool';
+    set_var('POOL_NAME', $pool_name);
+    print('POOL_NAME was set as: ', $pool_name, '\n')
 }
 
 1;

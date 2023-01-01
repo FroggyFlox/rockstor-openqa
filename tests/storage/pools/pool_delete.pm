@@ -25,11 +25,15 @@ use Utils::Rockstor_webui qw(navigate_to_pools);
 
 sub run {
 
+    my $raid_level = get_var('RAID_LEVEL');
+
     # Navigate to the main Pools page
     navigate_to_pools();
 
     # Click on the "delete" icon
-    assert_and_click([qw(pools_page_click_delete pools_page_single_click_delete)],
+    assert_and_click([
+        'pools_page_click_delete',
+        'pools_page_' . $raid_level . '_click_delete'],
         'timeout' => 30);
 
     # Click on "Confirm"

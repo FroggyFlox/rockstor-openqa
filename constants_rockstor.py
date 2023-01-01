@@ -160,6 +160,7 @@ class RockstorTestSuite:
             [
                 {"key": "NUMDISKS", "value": self.NUMDISKS_RAID_LEVEL[raid_level]},
                 {"key": "HDDSIZEGB", "value": "10"},
+                {"key": "RAID_LEVEL", "value": f"{raid_level}"},
             ]
         )
         return out_dict
@@ -208,6 +209,11 @@ class RockstorTestSuite:
         """
         name = f"{raid_level}_webui"
         out_dict = self.new_webui_test_suite(name=name)
+        out_dict[name]["settings"].extend(
+            [
+                {"key": "RAID_LEVEL", "value": f"{raid_level}"},
+            ]
+        )
         return out_dict
 
 

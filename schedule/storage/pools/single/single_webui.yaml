@@ -7,9 +7,9 @@ description:    >
 schedule:
     - webui/browse_to_rockstor
     - webui/homepage
-    - storage/pools/single/single_create_pool
-    - storage/pools/single/single_pool_details
-    - storage/pools/raid1/raid1_pool_balance
-    - storage/pools/raid1/raid1_pool_scrub
-    - storage/pools/raid1/raid1_pool_delete
+    - storage/pools/pool_create
+    - storage/pools/pool_details
+    - storage/pools/pool_balance
+    - storage/pools/pool_scrub
+    - storage/pools/pool_delete
     - storage/disks/disks_import_pool

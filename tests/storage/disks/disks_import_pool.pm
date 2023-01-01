@@ -21,17 +21,21 @@ use base 'basetest';
 use warnings;
 use strict;
 use testapi;
-use Utils::Rockstor_webui qw(navigate_to_disks navigate_to_pools);
+use Utils::Rockstor_webui qw(
+    navigate_to_disks
+    navigate_to_pools
+);
 
 sub run {
+
+    # Get pool name from ENV or set it if not yet defined
+    my $raid_level = get_var('RAID_LEVEL');
+
     # Navigate to the main Disks page
     navigate_to_disks();
 
     # Click the "import data" icon
-    assert_and_click([
-        'single_pool_click_import',
-        'raid1_pool_click_import',
-    ], 'timeout' => 30);
+    assert_and_click($raid_level . '_pool_click_import', 'timeout' => 30);
 
     # Confirm
     assert_and_click('disks_import_pool_confirm', 'timeout' => 30);
@@ -40,10 +44,7 @@ sub run {
 
     # Navigate to the pools page and verify the presence of the imported pool
     navigate_to_pools();
-    assert_screen([
-        'pools_page_single-pool_created',
-        'pools_page_raid1-pool_created',
-    ], 'timeout' => 120);
+    assert_screen('pools_page_'. $raid_level . '-pool_created', 'timeout' => 120);
 
 }
 

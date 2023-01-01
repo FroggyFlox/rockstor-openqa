@@ -1,4 +1,4 @@
-# Copyright (C) 2020-2021 SUSE LLC
+# Copyright (c) 2012-2022 RockStor, Inc. <http://rockstor.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,8 +14,7 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# Here, we simply test if we have an IP address. If we do, we let the
-# children know we are ready.
+# This module is used to navigate to the Storage > Pools page
 
 
 use base 'basetest';
@@ -23,29 +22,23 @@ use warnings;
 use strict;
 use testapi;
 use lockapi;
-use mmapi;
 
 sub run {
-    # Clear the screen
-    enter_cmd('clear');
 
-    # Wait for mutex signal to populate pool
-    ## Follow example in docs: https://open.qa/docs/#_test_synchronization_and_locking_api
-    ## When a parent (this job) needs to wait for a child, let's fetch the child ID first
-    ## and pass this to mutex_wait
-    my $children = get_children();
-    # We only have one child here
-    my $child_id = (keys %$children)[0];
-    # Pass this child_id to mutex_wait
-    mutex_wait('raid1_pool_created', $child_id);
+    my $raid_level = get_var('RAID_LEVEL');
 
-    # Populate pool
-    ## copy / to /mnt2/raid1_pool
-    assert_script_run('ls -lah /mnt2/raid1-pool/');
-    assert_script_run('cp -R /{usr,var} /mnt2/raid1-pool/.');
+    # Launch mutex to signal supportserver the system is ready
+    # to populate the pool with data
+    mutex_create $raid_level . '_pool_created';
 
-    # Send mutex ready signal
-    mutex_create 'raid1_pool_populated';
+    # Wait on mutex ready for population of data
+    mutex_wait $raid_level . '_pool_populated';
+
+    # Click on Pool name
+    assert_and_click('pools_page_' . $raid_level . '-pool_created_click_name', 'timeout' => 120);
+
+    # Verify page layout and raid configuration
+    assert_screen($raid_level . '-pool_details_page', 'timeout' => 120);
 }
 
 sub test_flags {
