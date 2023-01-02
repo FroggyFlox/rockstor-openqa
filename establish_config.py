@@ -5,6 +5,7 @@ from constants_rockstor import (
     FINAL_MACHINE_SETTINGS,
     FINAL_TEST_SUITES,
     FINAL_JOB_GROUPS,
+    FINAL_PRODUCTS_SETTINGS,
 )
 
 
@@ -69,6 +70,58 @@ def establish_machines():
         else:
             client.openqa_request("POST", "machines", params=machine)
             print(f"Created the machine named {machine['name']}.")
+
+
+def equal_in_db(target_dict, db_dict) -> bool:
+    """
+    Check whether the target_dict dictionary defines the same product
+     as db_dict given the uniqueness constraints applied to products/mediums.
+    """
+    # products have a UNIQUE (distri, version, arch, flavor) constraint
+    # applied in the DB
+    return (
+        db_dict.get("distri") == target_dict["distri"]
+        and db_dict.get("version") == target_dict["version"]
+        and db_dict.get("flavor") == target_dict["flavor"]
+        and db_dict.get("arch") == target_dict["arch"]
+    )
+
+
+def establish_products():
+    """
+    Ensures the MEDIUMS/PRODUCTS defined on the openQA server matches the definitions
+    in the FINAL_PRODUCTS_SETTINGS constant.
+    All mediums/products must represent a unique combination of distri, version,
+    flavor, and arch, so we first check for that in the server's database. If the
+    product/medium already exists, we update its definition
+    on the server based on the definition present in FINAL_PRODUCTS_SETTINGS.
+    All settings NOT defined in FINAL_PRODUCTS_SETTINGS will be removed by the
+    process. If the desired product/medium does not already exist, simply create it.
+    Note the use of 'data' instead of 'params' here due to our need to send
+    application/x-www-form-urlencoded data because of the '*' used for version
+    (see https://github.com/os-autoinst/openQA-python-client/pull/5 for details).
+
+    :return:
+    """
+    current_products = client.openqa_request("GET", "products")["Products"]
+    for p in FINAL_PRODUCTS_SETTINGS:
+        product_string = f"{p['distri']}-{p['version']}-{p['flavor']}-{p['arch']}"
+        # Search whether a product with the same name already exists
+        matching_product = [
+            matching_dict
+            for matching_dict in current_products
+            if equal_in_db(p, matching_dict)
+        ]
+
+        if len(matching_product) > 1:
+            raise ValueError(f"More than 1 product found matching {product_string}")
+        elif len(matching_product) == 1:
+            print(f"The product {product_string} already exists... update it.")
+            matching_product_id = matching_product[0]["id"]
+            client.openqa_request("PUT", f"products/{matching_product_id}", data=p)
+        else:
+            client.openqa_request("POST", "products", data=p)
+            print(f"Created the product {product_string}.")
 
 
 def establish_test_suites():
@@ -183,6 +236,9 @@ def establish_job_groups():
 
 print("############# Begin establishing MACHINES #############")
 establish_machines()
+print("\n")
+print("############# Begin establishing PRODUCTS #############")
+establish_products()
 print("\n")
 print("############# Begin establishing TEST SUITES #############")
 establish_test_suites()

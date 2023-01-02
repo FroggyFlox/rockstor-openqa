@@ -6,7 +6,6 @@ used by Rockstor openQA.
 from typing import Dict
 import pathlib
 
-
 FINAL_MACHINE_SETTINGS = [
     {
         "name": "64bit",
@@ -25,6 +24,20 @@ FINAL_MACHINE_SETTINGS = [
             {"key": "WORKER_CLASS", "value": "qemu_x86_64,tap"},
         ],
     },
+]
+
+FINAL_PRODUCTS_SETTINGS = [
+    {
+        "arch": f"{arch}",
+        "distri": "rockstor",
+        "flavor": "generic",
+        "settings": [
+            {"key": "DVD", "value": "1"},
+            {"key": "ISO_MAXSIZE", "value": "650000000"},
+        ],
+        "version": "*",
+    }
+    for arch in ["x86_64"]
 ]
 
 RAID_LEVEL = ["single", "raid1", "raid10"]
